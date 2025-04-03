@@ -24,12 +24,12 @@ define("DBPWD", "mande3");
  * @return PDO|false L'objet PDO représentant la connexion à la base de données,
  *                   ou false en cas d'échec de la connexion.
  */
-function getMovies(){
+function getMovie(){
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    $sql = "select id, name, image FROM movies";
+    $sql = "select id, name, image from Movie";
     $stmt = $cnx->prepare($sql);
     $stmt->execute();
-    $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-    return $movies;
+    return $res;
 }
