@@ -18,18 +18,17 @@ define("DBNAME", "mande3");
 define("DBLOGIN", "mande3");
 define("DBPWD", "mande3");
 
-/**
- * Fonction pour établir une connexion à la base de données.
- *
- * @return PDO|false L'objet PDO représentant la connexion à la base de données,
- *                   ou false en cas d'échec de la connexion.
- */
-function getMovie(){
-    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    $sql = "select id, name, image from Movie";
-    $stmt = $cnx->prepare($sql);
-    $stmt->execute();
-    $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
-    return $res;
-}
+
+function getMovie() {
+        // Connexion à la base de données
+        $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+        // Requête SQL pour récupérer le menu avec des paramètres
+        $sql = "select id, name, image from Movie";
+        // Prépare la requête SQL
+        $stmt = $cnx->prepare($sql);
+        // Exécute la requête SQL
+        $stmt->execute();
+        // Récupère les résultats de la requête sous forme d'objets
+        $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $res; // Retourne les résultats
+    }
