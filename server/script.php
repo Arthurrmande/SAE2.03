@@ -85,7 +85,6 @@ if ( isset($_REQUEST['todo']) ){
     exit();
   }
 
-  error_log("Réponse API : " . json_encode($data));
 
   /**
    * Si tout s'est bien passé, on renvoie la réponse HTTP avec les données ($data) retournées
