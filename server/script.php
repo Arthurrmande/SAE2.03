@@ -23,6 +23,13 @@
  * et définir la réponnse à renvoyer au client.
  */
 require("controller.php");
+/**
+ * Inclusion du fichier model.php.
+ * 
+ * Il contient les fonctions qui réalisent des opérations sur la base de données,
+ * telles que les requêtes SQL pour insérer, mettre à jour, supprimer ou récupérer des données.
+ */
+
 
 /**
  * Vérifie si la variable 'todo' est définie dans la requête.
@@ -51,9 +58,11 @@ if ( isset($_REQUEST['todo']) ){
   // en fonction de la valeur de 'todo', on appelle la fonction de contrôle appropriée
   // peut s'écrire aussi avec des if/else
   switch($todo){
+
     case 'getMovie': // si la valeur de 'todo' est 'getMovie', on appelle la fonction readController()
       $data = readController();
       break;
+
 
     default: // il y a un paramètre todo mais sa valeur n'est pas reconnue/supportée
       echo json_encode('[error] Unknown todo value');
@@ -75,6 +84,8 @@ if ( isset($_REQUEST['todo']) ){
     http_response_code(500); // 500 == "Internal error"
     exit();
   }
+
+  error_log("Réponse API : " . json_encode($data));
 
   /**
    * Si tout s'est bien passé, on renvoie la réponse HTTP avec les données ($data) retournées

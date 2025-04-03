@@ -13,12 +13,11 @@
     <section class="cards" id="content"></section>
 
     <script type="module">
+      // Importation de la NavBar
       import { NavBar } from "./component/NavBar/script.js";
-      import { Movie } from "./component/Movie/script.js";
-
 
       import { DataMovie } from "./data/dataMovie.js";
-
+      import { Movie } from "./component/Movie/script.js";
 
       // Controleur
       // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
@@ -30,13 +29,12 @@
           "Ceci est une base de projet pour la SAE2.03 édition 2025. Bonne chance !"
         );
       };
-
       C.start = function () {
         V.renderNavBar("C.handlerAbout()");
-        C.getMovie();
+        C.getMovie(); // Appelle la fonction pour récupérer les films
       };
 
-        /* C.getMovie
+      /* C.getMovie
 
         La fonction affiche sur la page la collection de films par défaut
       */
@@ -44,7 +42,6 @@
         let data = await DataMovie.requestMovies(); // On récupère les données par défaut et on attend avec await
         V.renderMovie(data); // Affiche les données
       };
-
 
       // Vue (contient tout ce qui est relatif à l'affichage)
       window.V = {};
@@ -61,14 +58,7 @@
         header.innerHTML = NavBar.format(hAbout);
       };
 
-       /**
-       * V.renderMovie
-       *
-       * Cette fonction est responsable de l'affichage de la liste des films.
-       * Elle sélectionne l'élément HTML avec l'ID "content" et y insère le contenu
-       * formaté par le composant Movie.
-       */
-       V.renderMovie = function (data) {
+      V.renderMovie = function (data) {
         let content = document.querySelector("#content");
         content.innerHTML = Movie.format(data);
       };
