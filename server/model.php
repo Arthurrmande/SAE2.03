@@ -17,3 +17,19 @@ define("HOST", "localhost");
 define("DBNAME", "mande3");
 define("DBLOGIN", "mande3");
 define("DBPWD", "mande3");
+
+/**
+ * Fonction pour établir une connexion à la base de données.
+ *
+ * @return PDO|false L'objet PDO représentant la connexion à la base de données,
+ *                   ou false en cas d'échec de la connexion.
+ */
+function getMovies(){
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    $sql = "select id, name, image FROM movies";
+    $stmt = $cnx->prepare($sql);
+    $stmt->execute();
+    $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    return $movies;
+}

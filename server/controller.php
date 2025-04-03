@@ -20,3 +20,8 @@
  */
 require("model.php");
 
+function readmovies(){
+  $movies = getMovies();
+  return $movies;
+}
+
