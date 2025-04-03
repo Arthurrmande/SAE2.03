@@ -1,4 +1,4 @@
-let HOST_URL = "..";//"http://mmi.unilim.fr/~????";
+let HOST_URL = "..";"https://mmi.unilim.fr/~mande3/SAE2.03-Arthur-Mande/";
 
 let DataMovie = {};
 
