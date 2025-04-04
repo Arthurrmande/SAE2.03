@@ -38,6 +38,11 @@ function addController(){
     $image = $_REQUEST['image'];
     $url = $_REQUEST['url'];
     $age = $_REQUEST['age'];
+
+    if (empty($titre) || empty($realisateur) || empty($annee) || empty($duree) || empty($desc) || empty($categorie) || empty($image) || empty($url) || empty($age)) {
+      return "Erreur : Tous les champs doivent être remplis.";
+    }
+
     // Mise à jour du menu à l'aide de la fonction addMovie décrite dans model.php
     $ok = addMovie($titre, $realisateur, $annee, $duree, $desc, $categorie, $image, $url, $age);
     // $ok est le nombre de ligne affecté par l'opération de mise à jour dans la BDD (voir model.php)

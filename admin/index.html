@@ -24,7 +24,7 @@
         
         // Sélectionne l'élément possédant la classe `.addMenu__form`
         // il s'agit de l'élément <form> du composant NewMenuForm
-          let form = document.querySelector('.addMenu__form');
+          let form = document.querySelector('.addMovie__form');
           let fd = new FormData(form);
           // Attend la réponse de la fonction `DataMovie.add(fd)`
           let res = await DataMovie.add(fd);
@@ -34,7 +34,7 @@
 
       C.start = function () {
         V.renderLog("Démarrage de l'application");
-        V.renderMovie("C.handlerAdd()");
+        V.renderForm("C.handlerAdd()");
       }
         
       window.V = {};
@@ -44,7 +44,7 @@
         content.innerHTML = Log.format(txt);
       }
 
-      V.renderMovie = function(handler) {
+      V.renderForm = function(handler) {
         let content = document.querySelector("#addMovie");
         content.innerHTML = NewMovieForm.format(handler);
       }

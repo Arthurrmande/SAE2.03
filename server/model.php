@@ -60,5 +60,6 @@ function addMovie($name, $director, $year, $length, $description, $id_category, 
     $stmt->bindParam(':min_age', $min_age);
     
     $stmt->execute();
-    return $stmt->rowCount(); 
+    $res = $stmt->rowCount();
+    return $res; 
 }
