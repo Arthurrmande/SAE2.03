@@ -29,15 +29,15 @@ function readController(){
 
 function addController(){
 
-    $titre = $_REQUEST['titre'];
-    $realisateur = $_REQUEST['realisateur'];
-    $annee = $_REQUEST['annee'];
-    $duree = $_REQUEST['duree'];
-    $desc = $_REQUEST['desc'];
-    $categorie = $_REQUEST['categorie'];
-    $image = $_REQUEST['image'];
-    $url = $_REQUEST['url'];
-    $age = $_REQUEST['age'];
+    $titre = $_REQUEST['name'] ?? null;
+    $realisateur = $_REQUEST['director'] ?? null;
+    $annee = $_REQUEST['year'] ?? null;
+    $duree = $_REQUEST['length'] ?? null;
+    $desc = $_REQUEST['description'] ?? null;
+    $categorie = $_REQUEST['categorie'] ?? null;
+    $image = $_REQUEST['image'] ?? null;
+    $url = $_REQUEST['trailer'] ?? null;
+    $age = $_REQUEST['min_age'] ?? null;
 
     if (empty($titre) || empty($realisateur) || empty($annee) || empty($duree) || empty($desc) || empty($categorie) || empty($image) || empty($url) || empty($age)) {
       return "Erreur : Tous les champs doivent être remplis.";
