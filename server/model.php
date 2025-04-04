@@ -42,22 +42,22 @@ function getMovie(){
  * Si la requête a réussi, le nombre de lignes affectées sera 1.
  * Si la requête a échoué, le nombre de lignes affectées sera 0.
  */
-function addMovie($titre, $realisateur, $annee, $duree, $desc, $categorie, $image, $url, $age){
+function addMovie($name, $director, $year, $length, $description, $id_category, $image, $trailer, $min_age){
     // Connexion à la base de données
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD); 
-    $sql = "INSERT INTO Movie (name, director, year, length, description, category, image, url, age) 
-            VALUES (:titre, :realisateur, :annee, :duree, :desc, :categorie, :image, :url, :age)";
+    $sql = "INSERT INTO Movie (name, director, year, length, description, id_category, image, trailer, min_age) 
+            VALUES (:name, :director, :year, :length, :description, :id_category, :image, :trailer, :min_age)";
     
     $stmt = $cnx->prepare($sql);
-    $stmt->bindParam(':titre', $titre);
-    $stmt->bindParam(':realisateur', $realisateur);
-    $stmt->bindParam(':annee', $annee);
-    $stmt->bindParam(':duree', $duree);
-    $stmt->bindParam(':desc', $desc);
-    $stmt->bindParam(':categorie', $categorie);
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':director', $director);
+    $stmt->bindParam(':year', $year);
+    $stmt->bindParam(':length', $length);
+    $stmt->bindParam(':description', $description);
+    $stmt->bindParam(':id_category', $id_category);
     $stmt->bindParam(':image', $image);
-    $stmt->bindParam(':url', $url);
-    $stmt->bindParam(':age', $age);
+    $stmt->bindParam(':trailer', $trailer);
+    $stmt->bindParam(':min_age', $min_age);
     
     $stmt->execute();
     return $stmt->rowCount(); 

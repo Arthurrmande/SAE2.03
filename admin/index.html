@@ -26,8 +26,8 @@
         // il s'agit de l'élément <form> du composant NewMenuForm
           let form = document.querySelector('.addMenu__form');
           let fd = new FormData(form);
-          // Attend la réponse de la fonction `DataMovie.update(fd)`
-          let res = await DataMovie.update(fd);
+          // Attend la réponse de la fonction `DataMovie.add(fd)`
+          let res = await DataMovie.add(fd);
           // Affiche le résultat de la mise à jour dans le journal
           V.renderLog(res);
       }

@@ -28,11 +28,6 @@ function readController(){
 
 
 function addController(){
-    // Validation des champs (tous sont requis)
-    if (!isset($_REQUEST['titre'], $_REQUEST['realisateur'], $_REQUEST['annee'], $_REQUEST['duree'],
-              $_REQUEST['desc'], $_REQUEST['categorie'], $_REQUEST['image'], $_REQUEST['url'], $_REQUEST['age'])) {
-        return false;
-    }
 
     $titre = $_REQUEST['titre'];
     $realisateur = $_REQUEST['realisateur'];
