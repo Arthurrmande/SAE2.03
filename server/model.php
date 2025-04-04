@@ -33,3 +33,32 @@ function getMovie(){
     // et on renvoie le tout.
     return $res; // Retourne les résultats
 }
+
+
+
+/**
+ * Met à jour le menu pour un jour spécifique dans la base de données. 
+ * A SAVOIR: une requête SQL de type update retourne le nombre de lignes affectées par la requête.
+ * Si la requête a réussi, le nombre de lignes affectées sera 1.
+ * Si la requête a échoué, le nombre de lignes affectées sera 0.
+ */
+function addMovie($titre, $realisateur, $annee, $duree, $desc, $categorie, $image, $url, $age){
+    // Connexion à la base de données
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD); 
+    $sql = "INSERT INTO Movie (name, director, year, length, description, category, image, url, age) 
+            VALUES (:titre, :realisateur, :annee, :duree, :desc, :categorie, :image, :url, :age)";
+    
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':titre', $titre);
+    $stmt->bindParam(':realisateur', $realisateur);
+    $stmt->bindParam(':annee', $annee);
+    $stmt->bindParam(':duree', $duree);
+    $stmt->bindParam(':desc', $desc);
+    $stmt->bindParam(':categorie', $categorie);
+    $stmt->bindParam(':image', $image);
+    $stmt->bindParam(':url', $url);
+    $stmt->bindParam(':age', $age);
+    
+    $stmt->execute();
+    return $stmt->rowCount(); 
+}

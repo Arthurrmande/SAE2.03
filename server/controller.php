@@ -25,3 +25,32 @@ function readController(){
     $movies = getMovie();
     return $movies;
 }
+
+
+function addController(){
+    // Validation des champs (tous sont requis)
+    if (!isset($_REQUEST['titre'], $_REQUEST['realisateur'], $_REQUEST['annee'], $_REQUEST['duree'],
+              $_REQUEST['desc'], $_REQUEST['categorie'], $_REQUEST['image'], $_REQUEST['url'], $_REQUEST['age'])) {
+        return false;
+    }
+
+    $titre = $_REQUEST['titre'];
+    $realisateur = $_REQUEST['realisateur'];
+    $annee = $_REQUEST['annee'];
+    $duree = $_REQUEST['duree'];
+    $desc = $_REQUEST['desc'];
+    $categorie = $_REQUEST['categorie'];
+    $image = $_REQUEST['image'];
+    $url = $_REQUEST['url'];
+    $age = $_REQUEST['age'];
+    // Mise à jour du menu à l'aide de la fonction addMovie décrite dans model.php
+    $ok = addMovie($titre, $realisateur, $annee, $duree, $desc, $categorie, $image, $url, $age);
+    // $ok est le nombre de ligne affecté par l'opération de mise à jour dans la BDD (voir model.php)
+    if ($ok!=0){
+      return "Le film a été ajouté avec succès.";
+    }
+    else{
+      return false;
+    }
+
+  }
