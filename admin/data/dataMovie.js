@@ -14,7 +14,7 @@ let DataMovie = {};
      * Elle prend en paramètre un jour (lundi mardi...) de la semaine et 
      * renvoie les données contenues dans la réponse du serveur (data).
      */
-DataMovie.add = async function(fdata){
+DataMovie.request = async function(fdata){
     let config = {
         method: "POST", // méthode HTTP à utiliser
         body: fdata // données à envoyer sous forme d'objet FormData
@@ -22,7 +22,7 @@ DataMovie.add = async function(fdata){
     // fetch permet d'envoyer une requête HTTP à l'URL spécifiée. 
     // L'URL est construite en concaténant HOST_URL à "/server/script.php?direction=" et la valeur de la variable dir. 
     // L'URL finale dépend de la valeur de HOST_URL et de dir.
-    let answer = await fetch(HOST_URL + "/server/script.php?todo=addMovie", config );
+    let answer = await fetch(HOST_URL + "/server/script.php?todo=", config );
     // answer est la réponse du serveur à la requête fetch.
     // On utilise ensuite la méthode json() pour extraire de cette réponse les données au format JSON.
     // Ces données (data) sont automatiquement converties en objet JavaScript.
@@ -31,20 +31,13 @@ DataMovie.add = async function(fdata){
     return data;
 }
 
-/** DataMovie.update
- * 
- * Prend en paramètre un objet FormData (données de formulaire) à envoyer au serveur.
- * Ces données sont incluses dans une requête HTTP en méthode POST.
- * Une requête POST au lieu de GET n'affiche pas les données dans l'URL (plus discret).
- * Les données sont placées dans le corps (body) de la requête HTTP. Elles restent visibles mais
- * en utilisant les outils de développement du navigateur (Network > Payload).
- * La requête comprend aussi un paramètre todo valant update pour indiquer au serveur qu'il
- * s'agit d'une mise à jour (car on a codé le serveur pour qu'il sache quoi faire en fonction de la valeur de todo).
+
+/** DataMovie.add
  * 
  * @param {*} fdata un objet FormData contenant les données du formulaire à envoyer au serveur.
  * @returns la réponse du serveur.
  */
-DataMovie.update = async function (fdata) {
+DataMovie.add = async function (fdata) {
     // fetch possède un deuxième paramètre (optionnel) qui est un objet de configuration de la requête HTTP:
     //  - method : la méthode HTTP à utiliser (GET, POST...)
     //  - body : les données à envoyer au serveur (sous forme d'objet FormData ou bien d'une chaîne de caractères, par exempe JSON)
@@ -52,7 +45,7 @@ DataMovie.update = async function (fdata) {
         method: "POST", // méthode HTTP à utiliser
         body: fdata // données à envoyer sous forme d'objet FormData
     };
-    let answer = await fetch(HOST_URL + "/server/script.php?todo=update", config);
+    let answer = await fetch(HOST_URL + "/server/script.php?todo=addMovie", config);
     let data = await answer.json();
     return data;
 }

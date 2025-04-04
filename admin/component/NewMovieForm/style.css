@@ -26,7 +26,9 @@ body {
   }
   
   /* Champs de formulaire */
-  .addMovie__form input[type="text"]{
+  .addMovie__form input[type="text"],
+  .addMovie__form input[type="number"],
+  .addMovie__form select{
     width: 100%;
     padding: 12px;
     margin: 6px 0;
@@ -42,7 +44,9 @@ body {
     color: #aaa;
   }
   
-  .addMovie__form input[type="text"]:focus {
+  .addMovie__form input[type="text"]:focus ,
+  .addMovie__form input[type="number"]:focus,
+  .addMovie__form select:focus{
     border-color: #5400fc;
     outline: none;
   }
@@ -66,6 +70,7 @@ body {
     background: #3900aa;
   }
   
+
   @media (min-width: 768px) {
     .addMovie {
       max-width: 400px;
@@ -76,12 +81,16 @@ body {
       font-size: 1.5em;
     }
   
-    .addMovie__form input[type="text"] {
+    .addMovie__form input[type="text"],
+    .addMovie__form input[type="number"],
+    .addMovie__form select{
       font-size: 1em;
       padding: 14px;
     }
   
-    .addMovie__form input[type="button"] {
+    .addMovie__form input[type="button"],
+    .addMovie__form input[type="number"],
+    .addMovie__form select{
       font-size: 1.1em;
       padding: 14px;
     }
