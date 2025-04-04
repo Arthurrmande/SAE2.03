@@ -63,3 +63,16 @@ function addMovie($name, $director, $year, $length, $description, $id_category, 
     $res = $stmt->rowCount();
     return $res; 
 }
+
+
+function getMovieDetail($id){
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    $sql = "SELECT * FROM Movie WHERE id = :id";
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    $res = $stmt->fetch(PDO::FETCH_OBJ);
+    return $res;
+}
+
+

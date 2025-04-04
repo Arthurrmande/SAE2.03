@@ -53,3 +53,10 @@ function addController(){
       return false;
     }
   }
+
+  function readMovieDetailController($id){
+    if (empty($id)) return false; // Validation de l'ID
+    $movieDetail = getMovieDetail($id);
+    return $movieDetail ? $movieDetail : false;
+  }
+

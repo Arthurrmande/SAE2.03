@@ -43,6 +43,7 @@
         V.renderMovie(data); // Affiche les données
       };
 
+
       // Vue (contient tout ce qui est relatif à l'affichage)
       window.V = {};
 
@@ -62,6 +63,35 @@
         let content = document.querySelector("#content");
         content.innerHTML = Movie.format(data);
       };
+
+
+      C.handlerDetail = async function (id) {
+        let movie = await DataMovie.requestMovieDetails(id);
+        V.renderMovieDetail(movie); 
+      };
+
+      V.renderMovieDetail = function (movie) {
+        let content = document.querySelector("#content");
+        content.innerHTML = `
+          <div>
+            <h1>${movie.name}</h1>
+            <img src="${movie.image}" alt="Affiche du film">
+            <p><strong>Synopsis :</strong> ${movie.description}</p>
+            <p><strong>Réalisateur :</strong> ${movie.director}</p>
+            <p><strong>Année :</strong> ${movie.year}</p>
+            <p><strong>Catégorie :</strong> ${movie.category}</p>
+            <p><strong>Restrictions d'âge :</strong> ${movie.min_age}+</p>
+            <iframe src="${movie.trailer}" frameborder="0" allowfullscreen></iframe>
+          </div>
+        `;
+      };
+
+      C.handlerBackToList = function () {
+        C.getMovie(); 
+      };
+
+
+
 
       C.start(); // Démarre l'application
     </script>

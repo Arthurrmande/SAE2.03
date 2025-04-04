@@ -14,4 +14,5 @@ Movie.format = function (movies) {
   return html;
 };
 
+
 export { Movie };
