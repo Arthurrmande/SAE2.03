@@ -26,7 +26,7 @@ body {
   }
   
   /* Champs de formulaire */
-  .addMovie__form input[type="text"] {
+  .addMovie__form input[type="text"]{
     width: 100%;
     padding: 12px;
     margin: 6px 0;
@@ -38,7 +38,7 @@ body {
     transition: all 0.3s ease;
   }
   
-  .addMovie__form input[type="text"]::placeholder {
+  .addMovie__form input[type="text"]::placeholder{
     color: #aaa;
   }
   
