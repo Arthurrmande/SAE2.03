@@ -54,9 +54,13 @@ function addController(){
     }
   }
 
-  function readMovieDetailController($id){
-    if (empty($id)) return false; // Validation de l'ID
-    $movieDetail = getMovieDetail($id);
-    return $movieDetail ? $movieDetail : false;
+  function readMovieDetailController(){
+    $id = $_REQUEST['id'] ?? null;
+  
+    if (empty($id)) {
+        return "Erreur : Tous les champs doivent être remplis.";
+    }
+  
+    return getMovieDetail($id);
   }
 

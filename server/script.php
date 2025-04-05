@@ -68,7 +68,6 @@ if ( isset($_REQUEST['todo']) ){
       break;
       
     case 'readMovieDetail':
-      $id = $_REQUEST['id'] ?? null;
       $data = readMovieDetailController($id);
       break;
     
