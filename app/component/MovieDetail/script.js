@@ -15,11 +15,6 @@ MovieDetail.format = function (movie) {
   detail = detail.replace("{{categorie}}", movie.category_name);
   detail = detail.replace("{{age}}", movie.min_age);
 
-  // On ajoute le trailer YouTube ici
-  let trailerIframe = `<iframe width="560" height="315" src="${movie.trailer}" frameborder="0" allowfullscreen></iframe>`;
-  detail = detail.replace("{{trailer}}", trailerIframe);
-
-  
   return detail;
 };
 

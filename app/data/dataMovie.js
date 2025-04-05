@@ -22,5 +22,6 @@ DataMovie.requestMovieDetails = async function(id) {
   return movieDetails;
 }
 
+
 // On exporte la fonction DataMovie.requestMovies
 export { DataMovie };
