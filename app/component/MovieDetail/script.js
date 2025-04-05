@@ -5,7 +5,7 @@ let MovieDetail = {};
 
 MovieDetail.format = function (movie) {
   let detail = template;
-  // console.log(movie); // debug
+
   detail = detail.replace("{{titre}}", movie.name);
   detail = detail.replace("{{image}}", movie.image);
   detail = detail.replace("{{desc}}", movie.description);
@@ -14,8 +14,12 @@ MovieDetail.format = function (movie) {
   detail = detail.replace("{{duree}}", movie.length);
   detail = detail.replace("{{categorie}}", movie.category_name);
   detail = detail.replace("{{age}}", movie.min_age);
-  detail = detail.replace("{{url}}", movie.trailer);
 
+  // On ajoute le trailer YouTube ici
+  let trailerIframe = `<iframe width="560" height="315" src="${movie.trailer}" frameborder="0" allowfullscreen></iframe>`;
+  detail = detail.replace("{{trailer}}", trailerIframe);
+
+  
   return detail;
 };
 
