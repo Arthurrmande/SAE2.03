@@ -6,6 +6,7 @@ let MovieDetail = {};
 MovieDetail.format = function (movie) {
   let detail = template;
 
+  detail = detail.replace("{{url}}", movie.trailer);
   detail = detail.replace("{{titre}}", movie.name);
   console.log(movie);
 
