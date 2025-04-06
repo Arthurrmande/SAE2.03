@@ -69,7 +69,7 @@ if ( isset($_REQUEST['todo']) ){
       
     case 'readMovieDetails':
       $data = readMovieDetailController();
-      break;
+      break; 
     
 
     default: // il y a un paramètre todo mais sa valeur n'est pas reconnue/supportée
