@@ -7,6 +7,8 @@ MovieDetail.format = function (movie) {
   let detail = template;
 
   detail = detail.replace("{{titre}}", movie.name);
+  console.log(movie);
+
   detail = detail.replace("{{image}}", movie.image);
   detail = detail.replace("{{desc}}", movie.description);
   detail = detail.replace("{{realisateur}}", movie.director);
