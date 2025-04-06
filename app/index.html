@@ -11,7 +11,8 @@
     <header id="header"></header>
 
     <section class="cards" id="content"></section>
-
+    <section class="toto" id="toto"></section>
+    
     <script type="module">
       // Importation de la NavBar
       import { NavBar } from "./component/NavBar/script.js";
@@ -27,23 +28,21 @@
       window.C = {};
 
 
-      C.handlerAbout = function () {
-        alert(
-          "Ceci est une base de projet pour la SAE2.03 édition 2025. Bonne chance !"
-        );
-      };
+
 
       C.handlerMovies = function () {
         C.getMovie(); 
       };
 
       C.handlerDetail = async function (id) {
+        console.log("handlerDetail", id);
         let detail = await DataMovie.requestMovieDetails(id);
-        V.renderMovieDetail(); 
+        console.log("detail", detail);
+        
+        V.renderMovieDetail(detail); // On affiche le détail du film
       };
 
       C.start = function () {
-        V.renderNavBar("C.handlerAbout()");
         V.renderNavBar("C.handlerMovies()");
         C.getMovie(); // Appelle la fonction pour récupérer les films
       };
@@ -80,7 +79,8 @@
 
       V.renderMovieDetail = function (data) {
         if (!data) return;
-        let content = document.querySelector("#content");
+        let content = document.querySelector("#toto");
+        console.log("data", data);
         content.innerHTML = MovieDetail.format(data);
       };
 
@@ -88,4 +88,4 @@
     </script>
   </body>
 </html>
-<!-- <script type="module"></script> -->
+<script type="module"></script>
