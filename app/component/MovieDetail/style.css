@@ -38,7 +38,6 @@
   }
 
   .details__info{
-    border: solid 1px red;
     display: flex;
     align-items: center;
   }
@@ -82,6 +81,16 @@
   
     .details__title {
       font-size: 2.5rem;
+    }
+
+    .details__desc,
+    .details__realisateur,
+    .details__annee,
+    .details__duree,
+    .details__categorie,
+    .details__age {
+      font-size: 1rem;
+      color: #ccc;
     }
   }
   

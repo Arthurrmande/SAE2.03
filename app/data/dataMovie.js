@@ -22,8 +22,23 @@ DataMovie.requestMovieDetails = async function(id) {
   return movieDetails;
 }
 
+DataMovie.requestCategory = async function(id) {
+  let answer = await fetch(HOST_URL + "/server/script.php?todo=getCategory");
+  let category = await answer.json();
+  return category;
+}
+
+
 
 // On exporte la fonction DataMovie.requestMovies
 export { DataMovie };
 
 // https://mmi.unilim.fr/~mande3/SAE2.03-Arthur-Mande-1/server/script.php?todo=getMovieDetail&id=7
+// https://mmi.unilim.fr/~mande3/SAE2.03-Arthur-Mande-1/server/script.php?todo=getCategory
+
+
+// DataMovie.requestMoviesByCategory = async function(id_category) {
+//   let answer = await fetch(HOST_URL + `/server/script.php?todo=getMovieByCategory&id_category=${id_category}`);
+//   let movies = await answer.json();
+//   return movies;
+// };

@@ -9,7 +9,7 @@
 
   <body>
     <header id="header"></header>
-
+    <section class="category" id="category"></section>
     <section class="toto" id="toto"></section>
     <section class="cards" id="content"></section>
     
@@ -21,14 +21,12 @@
       import { Movie } from "./component/Movie/script.js";
 
       import { MovieDetail } from "./component/MovieDetail/script.js";
+      import { MovieCategory } from "./component/MovieCategory/script.js";
 
       // Controleur
       // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
       // Une fois l'application terminée, on pourrait remettre let C.
       window.C = {};
-
-
-
 
       C.handlerMovies = function () {
         C.getMovie(); 
@@ -52,9 +50,26 @@
         La fonction affiche sur la page la collection de films par défaut
       */
       C.getMovie = async function () {
-        let data = await DataMovie.requestMovies(); // On récupère les données par défaut et on attend avec await
-        V.renderMovie(data); // Affiche les données
+        let detailssection = document.querySelector("#toto");
+        detailssection.innerHTML = "";
+
+        let data = await DataMovie.requestMovies(); 
+        V.renderMovie(data); 
       };
+
+      C.handlerCategory = async function (category) {
+        let data = await DataMovie.requestCategory(category);
+        V.renderMovie(data);
+      };
+
+      // C.handlerCategory = async function (id_category) {
+      //   let detailssection = document.querySelector("#toto");
+      //   detailssection.innerHTML = "";
+
+      //   let data = await DataMovie.requestMoviesByCategory(id_category);
+      //   V.renderMovie(data);
+      // };
+
 
 
       // Vue (contient tout ce qui est relatif à l'affichage)
@@ -83,6 +98,19 @@
         console.log("data", data);
         content.innerHTML = MovieDetail.format(data);
       };
+
+      V.renderMovieCategory = async function () {
+        let container = document.querySelector("#category");
+        let category = await DataMovie.requestCategory();
+        container.innerHTML = Moviecategorie.format(category);
+      };
+
+      // C.start = function () {
+        // V.renderNavBar("C.handlerMovies()");
+        // V.renderMovieCategory(); // <--- affiche les boutons de catégories
+        // C.getMovie(); // Affiche tous les films
+      // };
+
 
       C.start(); // Démarre l'application
     </script>

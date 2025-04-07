@@ -23,6 +23,9 @@ require ("model.php");
 function readController(){
  
     $movies = getMovie();
+    // if (empty()) {
+    //   return "Aucun film disponible pour le moment.";
+    // }
     return $movies;
 }
 
@@ -64,3 +67,18 @@ function addController(){
     return getMovieDetail($id);
   }
 
+  function readCategory(){
+    return getCategory();
+  }
+
+
+  // function readMoviesByCategoryController() {
+  //   $id_category = $_REQUEST['id_category'] ?? null;
+  
+  //   if (empty($id_category)) {
+  //     return false;
+  //   }
+  
+  //   return getMoviesByCategory($id_category);
+  // }
+  
