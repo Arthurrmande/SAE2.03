@@ -44,4 +44,5 @@ DataMovie.update = async function (fdata) {
     return data;
   };
 
+
 export {DataMovie};

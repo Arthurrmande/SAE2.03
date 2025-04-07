@@ -76,27 +76,6 @@ function getMovieDetail($id){
     return $res;
 }
 
-// function getCategory(){
-//     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-//     $sql = "SELECT id, name FROM Category";
-//     $answer = $cnx->query($sql);
-//     $res = $answer->fetchAll(PDO::FETCH_OBJ);
-//     return $res;
-// }
-
-// function getMoviesByCategory($id_category) {
-//     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-//     $sql = "SELECT Movie.id, Movie.name, image FROM Movie INNER JOIN Category ON Movie.id_category = Category.id 
-//             WHERE LOWER(Category.name) = LOWER(:categorie)";
-
-//     $stmt = $cnx->prepare($sql);
-//     $stmt->bindParam(':categorie', $categorie   , PDO::PARAM_STR);
-//     $stmt->execute();
-//     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
-//     return $res;
-//   }
-
-
 function getAllCategories() {
     // Connexion à la base de données
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
@@ -109,23 +88,25 @@ function getAllCategories() {
 }
 
 function getMoviecategorie($categorie){
-    // Connexion à la base de données
+
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    // Requête SQL pour récupérer les informations du film en fonction du nom
     $sql = "SELECT Movie.id, Movie.name, image 
             FROM Movie 
             INNER JOIN Category ON Movie.id_category = Category.id 
-            WHERE LOWER(Category.name) = LOWER(:categorie)
-";
+            WHERE LOWER(Category.name) = LOWER(:categorie)";
 
-    // Préparation de la requête SQL
     $stmt = $cnx->prepare($sql);
-    // Liaison du paramètre :id avec la variable $categorie){
     $stmt->bindParam(':categorie', $categorie   , PDO::PARAM_STR);
-    // Exécution de la requête
     $stmt->execute(); 
-    // Conversion des lignes récupérées en tableau d'objets (chaque ligne devient un objet)
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
-    return $res; // Retourne les résultats
+    return $res;
 }
 
+function getProfil(){
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    $sql = "SELECT id, name, image, datenaissance FROM User";
+
+    $answer = $cnx->query($sql);
+    $res = $answer->fetchAll(PDO::FETCH_OBJ);
+    return $res;
+}

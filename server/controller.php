@@ -23,9 +23,6 @@ require ("model.php");
 function readController(){
  
     $movies = getMovie();
-    // if (empty()) {
-    //   return "Aucun film disponible pour le moment.";
-    // }
     return $movies;
 }
 
@@ -67,23 +64,7 @@ function addController(){
     return getMovieDetail($id);
   }
 
-  // function readCategory(){
-  //   return getCategory();
-  // }
-  
-  // function readMoviesByCategoryController(){
-  //   $categorie = $_REQUEST['categorie'] ?? null;
-  
-  //   if (empty($categorie)) {
-  //       return "Erreur : Tous les champs doivent être remplis.";
-  //   }
-  
-  //   return getMoviesByCategory($categorie);
-  // }
-
   function readControllerMovieinfos(){
-    // Récupération des paramètres de la requête
-    // On utilise l'opérateur de coalescence nulle (??) pour assigner une valeur par défaut si la clé n'existe pas
     $id = $_REQUEST['id'] ?? null;
   
     if (empty($id)) {
@@ -94,8 +75,6 @@ function addController(){
   }
 
   function readControllerMoviecategorie(){
-    // Récupération des paramètres de la requête
-    // On utilise l'opérateur de coalescence nulle (??) pour assigner une valeur par défaut si la clé n'existe pas
     $categorie = $_REQUEST['categorie'] ?? null;
   
     if (empty($categorie)) {
@@ -107,4 +86,24 @@ function addController(){
 
   function readControllerCategories() {
     return getAllCategories();
+  }
+
+
+  function addProfil(){
+    $name = $_REQUEST['name'] ?? null;
+    $image = $_REQUEST['image'] ?? null;
+    $datenaissance = $_REQUEST['datenaissance'] ?? null;
+
+    if (empty($name) || empty($image) || empty($datenaissance)) {
+        return "Erreur : Tous les champs doivent être remplis.";
+    }
+
+    $ok = addUser($name, $image,$datenaissance);
+    
+    if ($ok!=0){
+      return "L'utilisateur $name a été ajouté avec succès !";
+    } 
+    else{
+      return "Erreur lors de l'ajout de l'utilisateur $titre !";
+    }
   }
