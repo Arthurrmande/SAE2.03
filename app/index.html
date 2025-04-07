@@ -9,7 +9,7 @@
 
   <body>
     <header id="header"></header>
-    <section class="category" id="category"></section>
+    <section class="categorie"></section>
     <section class="toto" id="toto"></section>
     <section class="cards" id="content"></section>
     
@@ -21,7 +21,7 @@
       import { Movie } from "./component/Movie/script.js";
 
       import { MovieDetail } from "./component/MovieDetail/script.js";
-      import { MovieCategory } from "./component/MovieCategory/script.js";
+      import { Moviecategorie } from "./component/Moviecategorie/script.js";
 
       // Controleur
       // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
@@ -40,9 +40,15 @@
         V.renderMovieDetail(detail); // On affiche le détail du film
       };
 
+      // C.start = function () {
+      //   V.renderNavBar("C.handlerMovies()");
+      //   C.getMovie(); // Appelle la fonction pour récupérer les films
+      // };
+
       C.start = function () {
         V.renderNavBar("C.handlerMovies()");
-        C.getMovie(); // Appelle la fonction pour récupérer les films
+        V.renderMovieCategorie();
+        C.getMovie();
       };
 
       /* C.getMovie
@@ -57,10 +63,6 @@
         V.renderMovie(data); 
       };
 
-      C.handlerCategory = async function (category) {
-        let data = await DataMovie.requestCategory(category);
-        V.renderMovie(data);
-      };
 
       // C.handlerCategory = async function (id_category) {
       //   let detailssection = document.querySelector("#toto");
@@ -70,6 +72,11 @@
       //   V.renderMovie(data);
       // };
 
+      C.handlerCategorie = async function (categorie) {
+        console.log("Catégorie sélectionnée :", categorie);
+        let data = await DataMovie.requestMoviecategorie(categorie);
+        V.renderMovie(data);
+      };
 
 
       // Vue (contient tout ce qui est relatif à l'affichage)
@@ -99,18 +106,17 @@
         content.innerHTML = MovieDetail.format(data);
       };
 
-      V.renderMovieCategory = async function () {
-        let container = document.querySelector("#category");
-        let category = await DataMovie.requestCategory();
-        container.innerHTML = Moviecategorie.format(category);
-      };
-
-      // C.start = function () {
-        // V.renderNavBar("C.handlerMovies()");
-        // V.renderMovieCategory(); // <--- affiche les boutons de catégories
-        // C.getMovie(); // Affiche tous les films
+      // V.renderMovieCategory = async function () {
+      //   let container = document.querySelector("#category");
+      //   let categories = await DataMovie.requestMoviesByCategory();
+      //   container.innerHTML = MovieCategory.format(categories);
       // };
 
+      V.renderMovieCategorie = async function () {
+        let container = document.querySelector(".categorie");
+        let categories = await DataMovie.requestCategories();
+        container.innerHTML = Moviecategorie.format(categories);
+      };
 
       C.start(); // Démarre l'application
     </script>

@@ -67,18 +67,25 @@ if ( isset($_REQUEST['todo']) ){
       $data = addController();
       break;
 
-    case 'getCategory': 
-      $data = readCategory();
-      break;
-      
     case 'getMovieDetail':
       $data = readMovieDetailController();
       break; 
+        
+    // case 'getCategory': 
+    //   $data = readCategory();
+    //   break;
 
-      // case 'getMovieByCategory':
-      //   $data = readMoviesByCategoryController();
-      //   break;
+    // case 'getMovieByCategory':
+    //   $data = readMoviesByCategoryController();
+    //   break;
     
+    case 'getCategories':
+      $data = readControllerCategories();
+      break;
+      
+    case 'getMoviecategorie':
+      $data = readControllerMoviecategorie(); 
+      break;
 
     default: // il y a un paramètre todo mais sa valeur n'est pas reconnue/supportée
       echo json_encode('[error] Unknown todo value');

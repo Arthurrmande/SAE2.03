@@ -67,18 +67,44 @@ function addController(){
     return getMovieDetail($id);
   }
 
-  function readCategory(){
-    return getCategory();
-  }
-
-
-  // function readMoviesByCategoryController() {
-  //   $id_category = $_REQUEST['id_category'] ?? null;
-  
-  //   if (empty($id_category)) {
-  //     return false;
-  //   }
-  
-  //   return getMoviesByCategory($id_category);
+  // function readCategory(){
+  //   return getCategory();
   // }
   
+  // function readMoviesByCategoryController(){
+  //   $categorie = $_REQUEST['categorie'] ?? null;
+  
+  //   if (empty($categorie)) {
+  //       return "Erreur : Tous les champs doivent être remplis.";
+  //   }
+  
+  //   return getMoviesByCategory($categorie);
+  // }
+
+  function readControllerMovieinfos(){
+    // Récupération des paramètres de la requête
+    // On utilise l'opérateur de coalescence nulle (??) pour assigner une valeur par défaut si la clé n'existe pas
+    $id = $_REQUEST['id'] ?? null;
+  
+    if (empty($id)) {
+        return "Erreur : Tous les champs doivent être remplis.";
+    }
+  
+    return getMovieinfos($id);
+  }
+
+  function readControllerMoviecategorie(){
+    // Récupération des paramètres de la requête
+    // On utilise l'opérateur de coalescence nulle (??) pour assigner une valeur par défaut si la clé n'existe pas
+    $categorie = $_REQUEST['categorie'] ?? null;
+  
+    if (empty($categorie)) {
+        return "Erreur : Tous les champs doivent être remplis.";
+    }
+  
+    return getMoviecategorie($categorie);
+  }
+
+  function readControllerCategories() {
+    return getAllCategories();
+  }

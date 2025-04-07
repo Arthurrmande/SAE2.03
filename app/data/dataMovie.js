@@ -22,11 +22,34 @@ DataMovie.requestMovieDetails = async function(id) {
   return movieDetails;
 }
 
-DataMovie.requestCategory = async function(id) {
-  let answer = await fetch(HOST_URL + "/server/script.php?todo=getCategory");
-  let category = await answer.json();
-  return category;
-}
+// DataMovie.requestCategory = async function() {
+//   let answer = await fetch(HOST_URL + "/server/script.php?todo=getCategory");
+//   let cat = await answer.json();
+//   return cat;
+// }
+
+DataMovie.requestCategories = async function () {
+  let answer = await fetch(HOST_URL + "/server/script.php?todo=getCategories");
+  let categories = await answer.json();
+  return categories;
+};
+
+
+// DataMovie.requestMoviesByCategory = async function(category) {
+//   let answer = await fetch(HOST_URL + "/server/script.php?todo=getMovieByCategory&category=" + category);
+//   let categorys = await answer.json();
+//   return categorys;
+// };
+
+DataMovie.requestMoviecategorie = async function (categorie) {
+  let answer = await fetch(
+    HOST_URL +
+      "/server/script.php?todo=getMoviecategorie&categorie=" +
+      categorie
+  );
+  let movie = await answer.json();
+  return movie;
+};
 
 
 
@@ -37,8 +60,3 @@ export { DataMovie };
 // https://mmi.unilim.fr/~mande3/SAE2.03-Arthur-Mande-1/server/script.php?todo=getCategory
 
 
-// DataMovie.requestMoviesByCategory = async function(id_category) {
-//   let answer = await fetch(HOST_URL + `/server/script.php?todo=getMovieByCategory&id_category=${id_category}`);
-//   let movies = await answer.json();
-//   return movies;
-// };
