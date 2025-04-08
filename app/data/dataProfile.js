@@ -1,0 +1,19 @@
+// URL où se trouve le répertoire "server" sur mmi.unilim.fr
+let HOST_URL = "https://mmi.unilim.fr/~mande3/SAE2.03-Arthur-Mande-1";
+
+let DataProfile = {};
+
+// DataProfile.requestMovies = async function () {
+//   // Récupération des films
+//   let answer = await fetch(HOST_URL + "server/script.php?todo=getMovie");
+//   let movies = await answer.json();
+//   return movies;
+// };
+
+DataProfile.requestProfil = async function () {
+  let answer = await fetch(HOST_URL + "/server/script.php?todo=readProfil");
+  let profil = await answer.json();
+  return profil;
+}
+
+export {DataProfile};

@@ -40,11 +40,6 @@
         V.renderMovieDetail(detail); // On affiche le détail du film
       };
 
-      // C.start = function () {
-      //   V.renderNavBar("C.handlerMovies()");
-      //   C.getMovie(); // Appelle la fonction pour récupérer les films
-      // };
-
       C.start = function () {
         V.renderNavBar("C.handlerMovies()");
         V.renderMovieCategorie();
@@ -62,15 +57,6 @@
         let data = await DataMovie.requestMovies(); 
         V.renderMovie(data); 
       };
-
-
-      // C.handlerCategory = async function (id_category) {
-      //   let detailssection = document.querySelector("#toto");
-      //   detailssection.innerHTML = "";
-
-      //   let data = await DataMovie.requestMoviesByCategory(id_category);
-      //   V.renderMovie(data);
-      // };
 
       C.handlerCategorie = async function (categorie) {
         console.log("Catégorie sélectionnée :", categorie);
@@ -105,12 +91,6 @@
         console.log("data", data);
         content.innerHTML = MovieDetail.format(data);
       };
-
-      // V.renderMovieCategory = async function () {
-      //   let container = document.querySelector("#category");
-      //   let categories = await DataMovie.requestMoviesByCategory();
-      //   container.innerHTML = MovieCategory.format(categories);
-      // };
 
       V.renderMovieCategorie = async function () {
         let container = document.querySelector(".categorie");

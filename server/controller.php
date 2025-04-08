@@ -112,3 +112,6 @@ function readProfilController() {
   return getProfil();
 }
 
+function readControllerProfil(){
+  return getProfil();
+}

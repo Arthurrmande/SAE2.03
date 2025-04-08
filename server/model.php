@@ -124,3 +124,13 @@ function getProfil(){
     $res = $answer->fetchAll(PDO::FETCH_OBJ);
     return $res;
 }
+
+
+function readProfil(){
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    $sql = "SELECT name, image, age FROM Profil";
+
+    $answer = $cnx->query($sql);
+    $res = $answer->fetchAll(PDO::FETCH_OBJ);
+    return $res; 
+}
