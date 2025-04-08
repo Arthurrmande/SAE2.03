@@ -43,7 +43,7 @@
       };
 
       C.start = function () {
-        V.renderNavBar("C.handlerMovies()");
+        V.renderNavBar("C.handlerMovies()", "C.handlerProfile()");
         V.renderMovieCategorie();
         C.getMovie();
       };
@@ -66,9 +66,30 @@
         V.renderMovie(data);
       };
 
-      C.handlerProfile = async function (id) {
-        const select = document.getElementById("profile-select");
-        const selectedOption = select.options[0];
+      C.handlerProfile = async function () {
+        const select = document.querySelector("#profile-select");
+        const selectedOption = select.selectedOptions[0];
+
+        const profileName = selectedOption.value;
+        const dob = selectedOption.getAttribute("data-dob");
+        const imageFilename = selectedOption.getAttribute("data-img");
+        const picture = document.querySelector("#profile-picture");
+        const base = "https://mmi.unilim.fr/~mande3/SAE2.03-Arthur-Mande-1/server/images/";
+        picture.src = base + imageFilename;
+
+        // Calcul de l'âge
+        let birthDate = new Date(dob);
+        let today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        let m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+          age--;
+        }
+        C.userAge = age; 
+
+        let Moviestrie = await DataMovie.requestMoviesByAge(age);
+
+        V.renderMovie(Moviestrie);
       };
 
       // Vue (contient tout ce qui est relatif à l'affichage)
@@ -81,9 +102,15 @@
        * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
        * formaté par le composant NavBar.
        */
-      V.renderNavBar = function (hAbout) {
+
+      V.renderNavBar = async function (hAbout) {
         let header = document.querySelector("#header");
-        header.innerHTML = NavBar.format(hAbout);
+        let profiles = await DataProfile.read();
+        header.innerHTML = NavBar.format(
+          hAbout,
+          "C.handlerProfile()",
+          profiles
+        );
       };
 
       V.renderMovie = function (data) {
