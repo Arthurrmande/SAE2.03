@@ -102,9 +102,23 @@ function getMoviecategorie($categorie){
     return $res;
 }
 
+function addProfil($name, $image, $age){
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    $sql = "INSERT INTO Profil (name, image, age) VALUES (:name, :image, :age)";
+    
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':image', $image);
+    $stmt->bindParam(':age', $age);
+    
+    $stmt->execute();
+    $res = $stmt->rowCount();
+    return $res; 
+}
+
 function getProfil(){
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    $sql = "SELECT id, name, image, datenaissance FROM User";
+    $sql = "SELECT id, name, image, age FROM Profil";
 
     $answer = $cnx->query($sql);
     $res = $answer->fetchAll(PDO::FETCH_OBJ);

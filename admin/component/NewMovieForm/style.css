@@ -4,19 +4,7 @@ body {
     min-height: 100vh;
     padding: 2rem;
   }
-  
-  /* Conteneur du formulaire */
-  .addMovie {
-    width: 100%;
-    max-width: 350px; 
-    padding: 20px;
-    background: rgba(20, 20, 20, 0.95);
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
-    color: #fff;
-    text-align: center;
-  }
-  
+
   /* Titre */
   .addMovie__title {
     font-size: 1.3em;
@@ -72,10 +60,6 @@ body {
   
 
   @media (min-width: 768px) {
-    .addMovie {
-      max-width: 400px;
-      padding: 25px;
-    }
   
     .addMovie__title {
       font-size: 1.5em;

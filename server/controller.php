@@ -29,32 +29,32 @@ function readController(){
 
 function addController(){
 
-    $titre = $_REQUEST['name'] ?? null;
-    $realisateur = $_REQUEST['director'] ?? null;
-    $annee = $_REQUEST['year'] ?? null;
-    $duree = $_REQUEST['length'] ?? null;
-    $desc = $_REQUEST['description'] ?? null;
-    $categorie = $_REQUEST['categorie'] ?? null;
-    $image = $_REQUEST['image'] ?? null;
-    $url = $_REQUEST['trailer'] ?? null;
-    $age = $_REQUEST['min_age'] ?? null;
+  $titre = $_REQUEST['name'] ?? null;
+  $realisateur = $_REQUEST['director'] ?? null;
+  $annee = $_REQUEST['year'] ?? null;
+  $duree = $_REQUEST['length'] ?? null;
+  $desc = $_REQUEST['description'] ?? null;
+  $categorie = $_REQUEST['categorie'] ?? null;
+  $image = $_REQUEST['image'] ?? null;
+  $url = $_REQUEST['trailer'] ?? null;
+  $age = $_REQUEST['min_age'] ?? null;
 
-    if (empty($titre) || empty($realisateur) || empty($annee) || empty($duree) || empty($desc) || empty($categorie) || empty($image) || empty($url) || empty($age)) {
-      return "Erreur : Tous les champs doivent être remplis.";
-    }
-
-    // Mise à jour du menu à l'aide de la fonction addMovie décrite dans model.php
-    $ok = addMovie($titre, $realisateur, $annee, $duree, $desc, $categorie, $image, $url, $age);
-    // $ok est le nombre de ligne affecté par l'opération de mise à jour dans la BDD (voir model.php)
-    if ($ok!=0){
-      return "Le film a été ajouté avec succès.";
-    }
-    else{
-      return false;
-    }
+  if (empty($titre) || empty($realisateur) || empty($annee) || empty($duree) || empty($desc) || empty($categorie) || empty($image) || empty($url) || empty($age)) {
+    return "Erreur : Tous les champs doivent être remplis.";
   }
 
-  function readMovieDetailController(){
+  // Mise à jour du menu à l'aide de la fonction addMovie décrite dans model.php
+  $ok = addMovie($titre, $realisateur, $annee, $duree, $desc, $categorie, $image, $url, $age);
+  // $ok est le nombre de ligne affecté par l'opération de mise à jour dans la BDD (voir model.php)
+  if ($ok!=0){
+    return "Le film a été ajouté avec succès.";
+  }
+  else{
+    return false;
+  }
+}
+
+function readMovieDetailController(){
     $id = $_REQUEST['id'] ?? null;
   
     if (empty($id)) {
@@ -62,9 +62,9 @@ function addController(){
     }
   
     return getMovieDetail($id);
-  }
+}
 
-  function readControllerMovieinfos(){
+function readControllerMovieinfos(){
     $id = $_REQUEST['id'] ?? null;
   
     if (empty($id)) {
@@ -72,38 +72,43 @@ function addController(){
     }
   
     return getMovieinfos($id);
-  }
+}
 
-  function readControllerMoviecategorie(){
-    $categorie = $_REQUEST['categorie'] ?? null;
+function readControllerMoviecategorie(){
+  $categorie = $_REQUEST['categorie'] ?? null;
   
-    if (empty($categorie)) {
-        return "Erreur : Tous les champs doivent être remplis.";
-    }
+  if (empty($categorie)) {
+      return "Erreur : Tous les champs doivent être remplis.";
+  }
   
-    return getMoviecategorie($categorie);
+  return getMoviecategorie($categorie);
+}
+
+function readControllerCategories() {
+  return getAllCategories();
+}
+
+
+function addControllerProfil(){
+  $name = $_REQUEST['name'] ?? null;
+  $image = $_REQUEST['image'] ?? null;
+  $datenaissance = $_REQUEST['age'] ?? null;
+
+  if (empty($name) || empty($image) || empty($datenaissance)) {
+      return "Erreur : Tous les champs doivent être remplis.";
   }
 
-  function readControllerCategories() {
-    return getAllCategories();
-  }
-
-
-  function addProfil(){
-    $name = $_REQUEST['name'] ?? null;
-    $image = $_REQUEST['image'] ?? null;
-    $datenaissance = $_REQUEST['datenaissance'] ?? null;
-
-    if (empty($name) || empty($image) || empty($datenaissance)) {
-        return "Erreur : Tous les champs doivent être remplis.";
-    }
-
-    $ok = addUser($name, $image,$datenaissance);
+  $ok = addProfil($name, $image,$datenaissance);
     
-    if ($ok!=0){
-      return "L'utilisateur $name a été ajouté avec succès !";
-    } 
-    else{
-      return "Erreur lors de l'ajout de l'utilisateur $titre !";
-    }
+  if ($ok!=0){
+    return "L'utilisateur $name a été ajouté avec succès !";
+  } 
+  else{
+    return "Erreur lors de l'ajout de l'utilisateur $titre !";
   }
+}
+
+function readProfilController() {
+  return getProfil();
+}
+

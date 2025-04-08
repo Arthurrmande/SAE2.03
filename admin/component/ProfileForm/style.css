@@ -1,24 +1,5 @@
-body {
-    background-color: #141414;
-    font-family: var(--ff-sans);
-    min-height: 100vh;
-    padding: 2rem;
-  }
-  
-  /* Conteneur du formulaire */
-  .addMovie {
-    width: 100%;
-    max-width: 350px; 
-    padding: 20px;
-    background: rgba(20, 20, 20, 0.95);
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
-    color: #fff;
-    text-align: center;
-  }
-  
   /* Titre */
-  .addMovie__title {
+  .addProfil__title {
     font-size: 1.3em;
     font-weight: bold;
     margin-bottom: 15px;
@@ -26,9 +7,9 @@ body {
   }
   
   /* Champs de formulaire */
-  .addMovie__form input[type="text"],
-  .addMovie__form input[type="number"],
-  .addMovie__form select{
+  .addProfil__form input[type="text"],
+  .addProfil__form input[type="date"],
+  .addProfil__form select{
     width: 100%;
     padding: 12px;
     margin: 6px 0;
@@ -40,19 +21,19 @@ body {
     transition: all 0.3s ease;
   }
   
-  .addMovie__form input[type="text"]::placeholder{
+  .addProfil__form input[type="text"]::placeholder{
     color: #aaa;
   }
   
-  .addMovie__form input[type="text"]:focus ,
-  .addMovie__form input[type="number"]:focus,
-  .addMovie__form select:focus{
+  .addProfil__form input[type="text"]:focus ,
+  .addProfil__form input[type="date"]:focus,
+  .addProfil__form select:focus{
     border-color: #5400fc;
     outline: none;
   }
   
   /* Bouton stylé */
-  .addMovie__form input[type="button"] {
+  .addProfil__form button[type="button"] {
     width: 100%;
     padding: 12px;
     margin-top: 10px;
@@ -66,7 +47,7 @@ body {
     transition: background 0.3s ease;
   }
   
-  .addMovie__form input[type="button"]:hover {
+  .addProfil__form button[type="button"]:hover {
     background: #3900aa;
   }
   
@@ -81,16 +62,16 @@ body {
       font-size: 1.5em;
     }
   
-    .addMovie__form input[type="text"],
-    .addMovie__form input[type="number"],
-    .addMovie__form select{
+    .addProfil__form input[type="text"],
+    .addProfil__form input[type="date"],
+    .addProfil__form select{
       font-size: 1em;
       padding: 14px;
     }
   
-    .addMovie__form input[type="button"],
-    .addMovie__form input[type="number"],
-    .addMovie__form select{
+    .addProfil__form input[type="button"],
+    .addProfil__form input[type="date"],
+    .addProfil__form select{
       font-size: 1.1em;
       padding: 14px;
     }
