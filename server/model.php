@@ -20,18 +20,39 @@ define("DBLOGIN", "mande3");
 define("DBPWD", "mande3");
 
 
-function getMovie(){
-    // Connexion à la base de données
-    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    // Requête SQL pour récupérer le nom, l'image et l'id du film
-    $sql = "SELECT id, name, image FROM Movie";
+// function getMovie(){
+//     // Connexion à la base de données
+//     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+//     // Requête SQL pour récupérer le nom, l'image et l'id du film
+//     $sql = "SELECT id, name, image FROM Movie";
 
-    // exécution de la requête SQL via la connexion à la bdd et récupération de la réponse sur serveur MySQL
-    $answer = $cnx->query($sql);
-    // conversion des lignes récupérées en tableau d'objets (chaque ligne devient un objet)
-    $res = $answer->fetchAll(PDO::FETCH_OBJ);
-    // et on renvoie le tout.
-    return $res; // Retourne les résultats
+//     // exécution de la requête SQL via la connexion à la bdd et récupération de la réponse sur serveur MySQL
+//     $answer = $cnx->query($sql);
+//     // conversion des lignes récupérées en tableau d'objets (chaque ligne devient un objet)
+//     $res = $answer->fetchAll(PDO::FETCH_OBJ);
+//     // et on renvoie le tout.
+//     return $res; // Retourne les résultats
+// }
+
+function getMovie($ageLimit = null){
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+
+    if ($ageLimit !== null) {
+        $sql = "SELECT id, name, image FROM Movie WHERE min_age <= :ageLimit";
+        $stmt = $cnx->prepare($sql);
+        $stmt->bindParam(':ageLimit', $ageLimit, PDO::PARAM_INT);
+        $stmt->execute();
+        $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+        
+        return $res;
+    
+    } else {
+        $sql = "SELECT id, name, image FROM Movie";
+        $answer = $cnx->query($sql);
+        $res = $answer->fetchAll(PDO::FETCH_OBJ);
+        
+        return $res;
+    }
 }
 
 
@@ -63,7 +84,6 @@ function addMovie($name, $director, $year, $length, $description, $id_category, 
     $res = $stmt->rowCount();
     return $res; 
 }
-
 
 function getMovieDetail($id){
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);

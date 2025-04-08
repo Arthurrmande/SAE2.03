@@ -3,10 +3,22 @@ let HOST_URL = "https://mmi.unilim.fr/~mande3/SAE2.03-Arthur-Mande-1";
 
 let DataMovie = {};
 
-DataMovie.requestMovies = async function () {
+// DataMovie.requestMovies = async function () {
+//   let answer = await fetch(HOST_URL + "/server/script.php?todo=getMovie");
+//   let movies = await answer.json();
+//   return movies;
+// };
+
+DataMovie.requestMovies = async function (ageLimit = 100) {
   let answer = await fetch(HOST_URL + "/server/script.php?todo=getMovie");
   let movies = await answer.json();
-  return movies;
+
+  // On filtre les films en fonction de l'âge limite
+  let filtered = movies.filter(movie => {
+    return parseInt(movie.ageLimit) <= ageLimit; //assure qu'on compare bien des entiers
+  });
+
+  return filtered;
 };
 
 DataMovie.requestMovieDetails = async function(id) {
