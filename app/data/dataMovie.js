@@ -10,7 +10,7 @@ let DataMovie = {};
 // };
 
 DataMovie.requestMovies = async function (ageLimit = 100) {
-  let answer = await fetch(HOST_URL + "/server/script.php?todo=getMovie");
+  let answer = await fetch(HOST_URL + "/server/script.php?todo=getMovie&ageLimit=" + ageLimit);
   let movies = await answer.json();
 
   // On filtre les films en fonction de l'âge limite
