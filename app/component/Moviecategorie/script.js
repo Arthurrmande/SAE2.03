@@ -1,18 +1,3 @@
-// let templateFile = await fetch("./component/MovieCategory/template.html");
-// let template = await templateFile.text();
-
-// let MovieCategory = {};
-
-// MovieCategory.format = function (category) {
-//   let listHTML = category.map((cat) =>`<li class="categorie__item" onclick="C.handlerCategory("${cat.name}")">${cat.name}</li>`)
-//   .join("");
-
-//   let html = template.replace("{{category}}", listHTML);
-//   return html;
-// };
-
-// export { MovieCategory };
-
 let templateFile = await fetch("./component/Moviecategorie/template.html");
 let template = await templateFile.text();
 
@@ -32,3 +17,31 @@ Moviecategorie.format = function (categories) {
 
 export { Moviecategorie };
 
+
+// let templateFile = await fetch("./component/Moviecategorie/template.html");
+// let template = await templateFile.text();
+
+// let Moviecategorie = {};
+
+// Moviecategorie.format = function (categories) {
+//   let optionsHTML = categories
+//     .map((cat) => `<option value="${cat.name}">${cat.name}</option>`)
+//     .join("");
+
+//   let html = template.replace("{{categories}}", optionsHTML);
+//   return html;
+// };
+
+// Moviecategorie.init = function () {
+//   const select = document.getElementById("categorie-select");
+//   if (!select) return;
+
+//   select.addEventListener("change", (e) => {
+//     const selectedCategory = e.target.value;
+//     if (selectedCategory) {
+//       C.handlerCategorie(selectedCategory);
+//     }
+//   });
+// };
+
+// export { Moviecategorie };
