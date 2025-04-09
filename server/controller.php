@@ -99,7 +99,6 @@ function readControllerCategories() {
   return getAllCategories();
 }
 
-
 function addControllerProfil(){
   $name = $_REQUEST['name'] ?? null;
   $image = $_REQUEST['image'] ?? null;
@@ -120,9 +119,5 @@ function addControllerProfil(){
 }
 
 function readProfilController() {
-  return getProfil();
-}
-
-function readControllerProfil(){
   return getProfil();
 }

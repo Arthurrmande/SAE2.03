@@ -9,9 +9,9 @@
 
   <body>
     <header id="header"></header>
+
     <section class="categorie"></section>
     <section class="toto" id="toto"></section>
-    <section class="tutu" id="tutu"></section>
     <section class="cards" id="content"></section>
     
     <script type="module">
@@ -25,28 +25,37 @@
       import { Moviecategorie } from "./component/Moviecategorie/script.js";
 
       import { DataProfile } from "./data/dataProfile.js";
+      
 
       // Controleur
       // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
       // Une fois l'application terminée, on pourrait remettre let C.
       window.C = {};
 
+      C.userAge = null; 
+
       C.handlerMovies = function () {
         C.getMovie(); 
       };
 
       C.handlerDetail = async function (id) {
-        console.log("handlerDetail", id);
-        let detail = await DataMovie.requestMovieDetails(id);
-        console.log("detail", detail);
-        
-        V.renderMovieDetail(detail); // On affiche le détail du film
+        let detail = await DataMovie.requestMovieDetails(id);        
+        V.renderMovieDetail(detail); 
       };
 
-      C.start = function () {
-        V.renderNavBar("C.handlerMovies()", "C.handlerProfile()");
+      // C.start = function () {
+      //   V.renderNavBar("C.handlerMovies()", "C.handlerProfile()");
+      //   V.renderMovieCategorie();
+      //   C.getMovie();
+      // };
+
+      C.start = async function () {
+        await V.renderNavBar("C.handlerMovies()");
         V.renderMovieCategorie();
         C.getMovie();
+
+        // On appelle un premier profile par défaut
+        C.handlerProfile();
       };
 
       /* C.getMovie
@@ -61,19 +70,28 @@
         V.renderMovie(data); 
       };
 
-      C.getMoviebyage = async function () {
-        let detailssection = document.querySelector("#tutu");
-        detailssection.innerHTML = "";
+      // C.getMoviebyage = async function () {
+      //   let detailssection = document.querySelector("#tutu");
+      //   detailssection.innerHTML = "";
 
-        let data = await DataMovie.requestMoviesbyage(); 
-        V.renderMoviebyage(data); 
-      };
+      //   let data = await DataMovie.requestMoviesbyage(); 
+      //   V.renderMoviebyage(data); 
+      // };
 
       C.handlerCategorie = async function (categorie) {
         console.log("Catégorie sélectionnée :", categorie);
         let data = await DataMovie.requestMoviecategorie(categorie);
         V.renderMovie(data);
       };
+
+      // C.handlerCategorie = async function (categorie) {
+      //   console.log("Catégorie sélectionnée :", categorie);
+      //   if (C.userAge === null) {
+      //     return;
+      //   }
+      //   let data = await DataMovie.requestMovieagecategory(C.userAge, categorie);
+      //   V.renderMovie(data);
+      // };
 
       C.handlerProfile = async function () {
         const select = document.querySelector("#profile-select");
@@ -96,9 +114,9 @@
         }
         C.userAge = age; 
 
-        let Moviestrie = await DataMovie.requestMoviesByAge(age);
-
-        V.renderMoviebyage(Moviestrie);
+        console.log(age);
+        let Moviestrie = await DataMovie.requestMoviesbyage(age);
+        V.renderMovie(Moviestrie);
       };
 
       // Vue (contient tout ce qui est relatif à l'affichage)
@@ -115,11 +133,7 @@
       V.renderNavBar = async function (hAbout) {
         let header = document.querySelector("#header");
         let profiles = await DataProfile.read();
-        header.innerHTML = NavBar.format(
-          hAbout,
-          "C.handlerProfile()",
-          profiles
-        );
+        header.innerHTML = NavBar.format(hAbout, "C.handlerProfile()", profiles);
       };
 
       V.renderMovie = function (data) {
@@ -127,10 +141,10 @@
         content.innerHTML = Movie.format(data);
       };
       
-      V.renderMoviebyage = function (data) {
-        let content = document.querySelector("#tutu");
-        content.innerHTML = Movie.format(data);
-      };
+      // V.renderMoviebyage = function (data) {
+      //   let content = document.querySelector("#tutu");
+      //   content.innerHTML = Movie.format(data);
+      // };
 
       V.renderMovieDetail = function (data) {
         if (!data) return;
@@ -144,8 +158,6 @@
         let categories = await DataMovie.requestCategories();
         container.innerHTML = Moviecategorie.format(categories);
       };
-
-
 
       C.start(); // Démarre l'application
     </script>

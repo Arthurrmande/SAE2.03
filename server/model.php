@@ -55,8 +55,6 @@ function getMoviebyage($ageLimit = null){
     }
 }
 
-
-
 /**
  * Met à jour le menu pour un jour spécifique dans la base de données. 
  * A SAVOIR: une requête SQL de type update retourne le nombre de lignes affectées par la requête.
@@ -110,9 +108,7 @@ function getAllCategories() {
 function getMoviecategorie($categorie){
 
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    $sql = "SELECT Movie.id, Movie.name, image 
-            FROM Movie 
-            INNER JOIN Category ON Movie.id_category = Category.id 
+    $sql = "SELECT Movie.id, Movie.name, image FROM Movie INNER JOIN Category ON Movie.id_category = Category.id 
             WHERE LOWER(Category.name) = LOWER(:categorie)";
 
     $stmt = $cnx->prepare($sql);
@@ -120,6 +116,18 @@ function getMoviecategorie($categorie){
     $stmt->execute(); 
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
     return $res;
+}
+
+function getMoviesagecategory($age, $categorie) {
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+    $sql = "SELECT Movie.id, Movie.name, Movie.image FROM Movie INNER JOIN Category ON Movie.id_category = Category.id
+            WHERE Movie.min_age <= :age AND LOWER(Category.name) = LOWER(:categorie)";
+
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':age', $age, PDO::PARAM_INT);
+    $stmt->bindParam(':categorie', $categorie, PDO::PARAM_STR);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
 }
 
 function addProfil($name, $image, $age){
@@ -143,14 +151,4 @@ function getProfil(){
     $answer = $cnx->query($sql);
     $res = $answer->fetchAll(PDO::FETCH_OBJ);
     return $res;
-}
-
-
-function readProfil(){
-    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    $sql = "SELECT name, image, age FROM Profil";
-
-    $answer = $cnx->query($sql);
-    $res = $answer->fetchAll(PDO::FETCH_OBJ);
-    return $res; 
 }

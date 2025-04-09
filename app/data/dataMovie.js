@@ -10,15 +10,10 @@ DataMovie.requestMovies = async function () {
 };
 
 DataMovie.requestMoviesbyage = async function (ageLimit = 100) {
-  let answer = await fetch(HOST_URL + "/server/script.php?todo=getMovie&ageLimit=" + ageLimit);
+  let answer = await fetch(HOST_URL + "/server/script.php?todo=getMoviebyage&ageLimit=" + ageLimit);
   let movies = await answer.json();
-
-  // On filtre les films en fonction de l'âge limite
-  let filtered = movies.filter(movie => {
-    return parseInt(movie.ageLimit) <= ageLimit; //assure qu'on compare bien des entiers
-  });
-
-  return filtered;
+  console.log(movies);
+  return movies;
 };
 
 DataMovie.requestMovieDetails = async function(id) {
@@ -34,15 +29,16 @@ DataMovie.requestCategories = async function () {
 };
 
 DataMovie.requestMoviecategorie = async function (categorie) {
-  let answer = await fetch(
-    HOST_URL +
-      "/server/script.php?todo=getMoviecategorie&categorie=" +
-      categorie
-  );
+  let answer = await fetch(HOST_URL + "/server/script.php?todo=getMoviecategorie&categorie=" + categorie);
   let movie = await answer.json();
   return movie;
 };
 
+// DataMovie.requestMovieagecategory = async function (categorie, age) {
+//   let answer = await fetch(HOST_URL + "/server/script.php?todo=getMoviesagecategory&categorie=" + categorie + "&age=" + age);
+//   let movies = await answer.json();
+//   return movies;
+// };
 
 // On exporte la fonction DataMovie.requestMovies
 export { DataMovie };
