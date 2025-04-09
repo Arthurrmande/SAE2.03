@@ -20,21 +20,21 @@ define("DBLOGIN", "mande3");
 define("DBPWD", "mande3");
 
 
-// function getMovie(){
-//     // Connexion à la base de données
-//     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-//     // Requête SQL pour récupérer le nom, l'image et l'id du film
-//     $sql = "SELECT id, name, image FROM Movie";
+function getMovie(){
+    // Connexion à la base de données
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    // Requête SQL pour récupérer le nom, l'image et l'id du film
+    $sql = "SELECT id, name, image FROM Movie";
 
-//     // exécution de la requête SQL via la connexion à la bdd et récupération de la réponse sur serveur MySQL
-//     $answer = $cnx->query($sql);
-//     // conversion des lignes récupérées en tableau d'objets (chaque ligne devient un objet)
-//     $res = $answer->fetchAll(PDO::FETCH_OBJ);
-//     // et on renvoie le tout.
-//     return $res; // Retourne les résultats
-// }
+    // exécution de la requête SQL via la connexion à la bdd et récupération de la réponse sur serveur MySQL
+    $answer = $cnx->query($sql);
+    // conversion des lignes récupérées en tableau d'objets (chaque ligne devient un objet)
+    $res = $answer->fetchAll(PDO::FETCH_OBJ);
+    // et on renvoie le tout.
+    return $res; // Retourne les résultats
+}
 
-function getMovie($ageLimit = null){
+function getMoviebyage($ageLimit = null){
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
 
     if ($ageLimit !== null) {

@@ -20,20 +20,20 @@
  */
 require ("model.php");
 
-// function readController(){
- 
-//     $movies = getMovie();
-//     return $movies;
-// }
-
 function readController(){
+ 
+    $movies = getMovie();
+    return $movies;
+}
+
+function readControllerbyage(){
   $ageLimit = $_REQUEST['ageLimit'] ?? null;
 
   if ($ageLimit !== null) {
-      $ageLimit = intval($ageLimit); // pour éviter toute injection ou erreur
+      $ageLimit = intval($ageLimit);
   }
 
-  $movies = getMovie($ageLimit);
+  $movies = getMoviebyage($ageLimit);
   return $movies;
 }
 

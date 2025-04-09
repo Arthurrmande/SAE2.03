@@ -11,6 +11,7 @@
     <header id="header"></header>
     <section class="categorie"></section>
     <section class="toto" id="toto"></section>
+    <section class="tutu" id="tutu"></section>
     <section class="cards" id="content"></section>
     
     <script type="module">
@@ -60,6 +61,14 @@
         V.renderMovie(data); 
       };
 
+      C.getMoviebyage = async function () {
+        let detailssection = document.querySelector("#tutu");
+        detailssection.innerHTML = "";
+
+        let data = await DataMovie.requestMoviesbyage(); 
+        V.renderMoviebyage(data); 
+      };
+
       C.handlerCategorie = async function (categorie) {
         console.log("Catégorie sélectionnée :", categorie);
         let data = await DataMovie.requestMoviecategorie(categorie);
@@ -89,7 +98,7 @@
 
         let Moviestrie = await DataMovie.requestMoviesByAge(age);
 
-        V.renderMovie(Moviestrie);
+        V.renderMoviebyage(Moviestrie);
       };
 
       // Vue (contient tout ce qui est relatif à l'affichage)
@@ -115,6 +124,11 @@
 
       V.renderMovie = function (data) {
         let content = document.querySelector("#content");
+        content.innerHTML = Movie.format(data);
+      };
+      
+      V.renderMoviebyage = function (data) {
+        let content = document.querySelector("#tutu");
         content.innerHTML = Movie.format(data);
       };
 
