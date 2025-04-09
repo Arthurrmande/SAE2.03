@@ -1,0 +1,13 @@
+<div class="changeProfil">
+  <h4 class="changeProfil__title"># Modifier un profile</h4>
+  <select id="Profil-select" onchange="{{handlerProfil}}">
+    {{options}}
+  </select>
+  
+  <form class="changeProfil__form">
+    <input required type="text" name="name" placeholder="Saisir un nom" />
+    <input required type="text" name="image" placeholder="Url de l'avatar"/>
+    <input required type="date" name="age" placeholder="Saisir une date de naissance"/>
+    <button type="button" onclick="{{handlerchange}}">Modifier</button>
+  </form>
+</div>
