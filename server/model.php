@@ -105,18 +105,18 @@ function getAllCategories() {
     return $res;
 }
 
-function getMoviecategorie($categorie){
+// function getMoviecategorie($categorie){
 
-    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    $sql = "SELECT Movie.id, Movie.name, image FROM Movie INNER JOIN Category ON Movie.id_category = Category.id 
-            WHERE LOWER(Category.name) = LOWER(:categorie)";
+//     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+//     $sql = "SELECT Movie.id, Movie.name, image FROM Movie INNER JOIN Category ON Movie.id_category = Category.id 
+//             WHERE LOWER(Category.name) = LOWER(:categorie)";
 
-    $stmt = $cnx->prepare($sql);
-    $stmt->bindParam(':categorie', $categorie   , PDO::PARAM_STR);
-    $stmt->execute(); 
-    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
-    return $res;
-}
+//     $stmt = $cnx->prepare($sql);
+//     $stmt->bindParam(':categorie', $categorie   , PDO::PARAM_STR);
+//     $stmt->execute(); 
+//     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+//     return $res;
+// }
 
 function getMoviesagecategory($age, $categorie) {
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);

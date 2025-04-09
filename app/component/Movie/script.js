@@ -4,8 +4,8 @@ let template = await templateFile.text();
 let Movie = {};
 
 Movie.format = function (movies) {
-  if (movies.length === 0) {
-    return "<p>Aucun film disponible dans cette catégorie   </p>";
+  if (movies.length < 1) {
+    return "<p>Aucun film disponible dans cette catégorie ou pour votre tranche d'âge.</p>";
   }
 
   let html = "";

@@ -91,8 +91,12 @@ function readControllerMoviecategorie(){
   if (empty($categorie)) {
       return "Erreur : Tous les champs doivent être remplis.";
   }
+  $age = $_REQUEST['age'] ?? null;
+  if (empty($age)) {
+      return "Erreur : Tous les champs doivent être remplis.";
+  }
   
-  return getMoviecategorie($categorie);
+  return getMoviesagecategory($age, $categorie);
 }
 
 function readControllerCategories() {

@@ -43,12 +43,6 @@
         V.renderMovieDetail(detail); 
       };
 
-      // C.start = function () {
-      //   V.renderNavBar("C.handlerMovies()", "C.handlerProfile()");
-      //   V.renderMovieCategorie();
-      //   C.getMovie();
-      // };
-
       C.start = async function () {
         await V.renderNavBar("C.handlerMovies()");
         V.renderMovieCategorie();
@@ -62,36 +56,35 @@
 
         La fonction affiche sur la page la collection de films par défaut
       */
+
       C.getMovie = async function () {
         let detailssection = document.querySelector("#toto");
         detailssection.innerHTML = "";
 
-        let data = await DataMovie.requestMovies(); 
+        let data;
+        if (C.userAge !== null) {
+          data = await DataMovie.requestMoviesbyage(C.userAge);
+        } else {
+          data = await DataMovie.requestMovies();
+        }
+
         V.renderMovie(data); 
       };
 
-      // C.getMoviebyage = async function () {
-      //   let detailssection = document.querySelector("#tutu");
-      //   detailssection.innerHTML = "";
-
-      //   let data = await DataMovie.requestMoviesbyage(); 
-      //   V.renderMoviebyage(data); 
-      // };
-
       C.handlerCategorie = async function (categorie) {
         console.log("Catégorie sélectionnée :", categorie);
-        let data = await DataMovie.requestMoviecategorie(categorie);
+
+        let data;
+
+        if (C.userAge !== null) {
+          data = await DataMovie.requestMovieagecategory(categorie, C.userAge);
+        } else {
+          data = await DataMovie.requestMoviecategorie(categorie);
+        }
+
         V.renderMovie(data);
       };
 
-      // C.handlerCategorie = async function (categorie) {
-      //   console.log("Catégorie sélectionnée :", categorie);
-      //   if (C.userAge === null) {
-      //     return;
-      //   }
-      //   let data = await DataMovie.requestMovieagecategory(C.userAge, categorie);
-      //   V.renderMovie(data);
-      // };
 
       C.handlerProfile = async function () {
         const select = document.querySelector("#profile-select");
@@ -140,11 +133,6 @@
         let content = document.querySelector("#content");
         content.innerHTML = Movie.format(data);
       };
-      
-      // V.renderMoviebyage = function (data) {
-      //   let content = document.querySelector("#tutu");
-      //   content.innerHTML = Movie.format(data);
-      // };
 
       V.renderMovieDetail = function (data) {
         if (!data) return;
