@@ -126,39 +126,20 @@ function readProfilController() {
   return getProfil();
 }
 
-// function changeControllerProfil(){
-//   $name = $_REQUEST['name'] ?? null;
-//   $image = $_REQUEST['image'] ?? null;
-//   $age = $_REQUEST['age'] ?? null;
-
-//   if (empty($name) || empty($image) || empty($age)) {
-//       return "Erreur : Tous les champs doivent être remplis.";
-//   }
-
-//   $ok = changeProfil($name, $image,$age);
-    
-//   if ($ok!=0){
-//     return "L'utilisateur $name a été modifié avec succès !";
-//   } 
-//   else{
-//     return "Erreur lors de la modification de l'utilisateur $name !";
-//   }
-// }
-
 function changeControllerProfil(){
-  $id = $_REQUEST['id'] ?? null;
+  $ancienname = $_REQUEST['ancienname'] ?? null;
   $name = $_REQUEST['name'] ?? null;
   $image = $_REQUEST['image'] ?? null;
   $age = $_REQUEST['age'] ?? null;
 
-  if (empty($id) || empty($name) || empty($image) || empty($age)) {
+  if (empty($ancienname) || empty($name) || empty($image) || empty($age)) {
       return "Erreur : Tous les champs doivent être remplis.";
   }
 
-  $ok = changeProfil($id, $name, $image, $age);
+  $ok = changeProfil($ancienname, $name, $image, $age);
 
   if ($ok != 0){
-    return "Le profil a été modifié avec succès.";
+    return "Le profil $ancienname a été modifié avec succès.";
   } else {
     return "Aucune modification effectuée.";
   }

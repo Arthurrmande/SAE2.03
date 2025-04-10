@@ -153,28 +153,13 @@ function getProfil(){
     return $res;
 }
 
-// function changeProfil($name, $image, $age){
-//     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-
-//     $sql = "UPDATE Profil SET name = :name, image = :image, age = :age WHERE id = :id";
-    
-//     $stmt = $cnx->prepare($sql);
-//     $stmt->bindParam(':name', $name);
-//     $stmt->bindParam(':image', $image);
-//     $stmt->bindParam(':age', $age);
-    
-//     $stmt->execute();
-//     $res = $stmt->rowCount();
-//     return $res; 
-// }
-
-function changeProfil($id, $name, $image, $age){
+function changeProfil($ancienname , $name, $image, $age){
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
 
-    $sql = "UPDATE Profil SET name = :name, image = :image, age = :age WHERE id = :id";
+    $sql = "UPDATE Profil SET name = :name, image = :image, age = :age WHERE name = :ancienname";
     
     $stmt = $cnx->prepare($sql);
-    $stmt->bindParam(':id', $id);
+    $stmt->bindParam(':ancienname', $ancienname);
     $stmt->bindParam(':name', $name);
     $stmt->bindParam(':image', $image);
     $stmt->bindParam(':age', $age);

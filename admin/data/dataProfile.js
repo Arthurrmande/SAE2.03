@@ -31,7 +31,7 @@ DataProfile.changeProfil = async function (fdata) {
         method: "POST", // méthode HTTP à utiliser
         body: fdata // données à envoyer sous forme d'objet FormData
     };
-
+    console.log(config);
     let answer = await fetch(HOST_URL + "/server/script.php?todo=changeProfil&",config);
     let data = await answer.json();
     return data;
@@ -43,9 +43,4 @@ DataProfile.getProfil = async function () {
     return data;
 };
 
-// DataProfile.changeProfil = async function (id, name) {
-//     let answer = await fetch(HOST_URL + "/server/script.php?todo=changeProfil&id=" + id + "&name=" + name + "&image=" + image);
-//     let movies = await answer.json();
-//     return movies;
-//   };
 export { DataProfile };
