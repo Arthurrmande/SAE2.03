@@ -36,4 +36,16 @@ DataProfile.changeProfil = async function (fdata) {
     let data = await answer.json();
     return data;
 };
+
+DataProfile.getProfil = async function () {
+    let answer = await fetch(HOST_URL + "/server/script.php?todo=getProfil");
+    let data = await answer.json();
+    return data;
+};
+
+// DataProfile.changeProfil = async function (id, name) {
+//     let answer = await fetch(HOST_URL + "/server/script.php?todo=changeProfil&id=" + id + "&name=" + name + "&image=" + image);
+//     let movies = await answer.json();
+//     return movies;
+//   };
 export { DataProfile };

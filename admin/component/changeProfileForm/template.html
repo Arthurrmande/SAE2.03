@@ -1,13 +1,32 @@
-<div class="changeProfil">
+<!-- <div class="changeProfil">
   <h4 class="changeProfil__title"># Modifier un profile</h4>
-  <select id="Profil-select" onchange="{{handlerProfil}}">
-    {{options}}
-  </select>
   
   <form class="changeProfil__form">
+    <select onchange="C.handlerchangeProfil()">
+      {{options}}
+    </select>
     <input required type="text" name="name" placeholder="Saisir un nom" />
     <input required type="text" name="image" placeholder="Url de l'avatar"/>
     <input required type="date" name="age" placeholder="Saisir une date de naissance"/>
+    
     <button type="button" onclick="{{handlerchange}}">Modifier</button>
   </form>
+</div> -->
+
+<div class="changeProfil">
+  <h4 class="changeProfil__title"># Modifier un profil</h4>
+  
+  <form class="changeProfil__form">
+    <!-- Le select pour choisir le profil -->
+    <select id="profile-select" onchange="C.handlerProfile()">
+      <!-- Options seront ajoutées dynamiquement ici -->
+    </select>
+    
+    <input required type="text" name="name" id="profile-name" placeholder="Saisir un nom" />
+    <input required type="text" name="image" id="profile-image" placeholder="Url de l'avatar"/>
+    <input required type="date" name="dob" id="profile-dob" placeholder="Saisir une date de naissance"/>
+    
+    <button type="button" onclick="C.handlerchangeProfil()">Modifier</button>
+  </form>
 </div>
+

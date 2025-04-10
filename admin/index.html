@@ -24,7 +24,7 @@
 
 
       window.C = {};
-
+      C.profil = null;
       
       C.handlerAdd = async function(){
           let form = document.querySelector('.addMovie__form');
@@ -42,19 +42,46 @@
 
       C.handlerchangeProfil = async function(){
         let form = document.querySelector('.changeProfil__form');
-        let fd = new FormData(form);
-        let res = await DataProfile.changeProfil(fd);
+        let res = await DataProfile.changeProfil(C.profil.id);
         V.renderLog(res);
       }
 
-      C.handlerProfil= function () {
-        let select = document.querySelector("#Profil-select");
-        let id = select.value;
-        let res = DataProfile.getProfil(id);
-        let form = document.querySelector('.changeProfil__form');
-        form.name.value = res.name;
-        form.image.value = res.image;
-        form.age.value = res.age;
+      // Fonction pour charger les profils
+      C.loadProfiles = async function() {
+        const profiles = await DataProfile.getProfil(); // Récupérer les profils depuis le backend (vous devez définir cette fonction dans DataProfile)
+
+        // Sélectionner le `<select>` et vider son contenu
+        const select = document.querySelector("#profile-select");
+        select.innerHTML = ''; // Vider le contenu existant
+
+        // Remplir le select avec les options de profils
+        profiles.forEach(profile => {
+          let option = document.createElement("option");
+          option.value = profile.name;  // Nom du profil
+          option.setAttribute("data-dob", profile.dob);  // Date de naissance
+          option.setAttribute("data-img", profile.image);  // Avatar de l'image
+          option.innerText = profile.name;  // Texte visible dans l'option
+          select.appendChild(option);
+        });
+      };
+
+      // Handler pour changer de profil
+      C.handlerProfile = async function () {
+        // Récupérer le profil sélectionné
+        const select = document.querySelector("#profile-select");
+        const selectedOption = select.selectedOptions[0];
+        
+        const profileName = selectedOption.value;
+        const dob = selectedOption.getAttribute("data-dob");
+        const imageFilename = selectedOption.getAttribute("data-img");
+
+        // Mettre à jour l'image du profil
+        const picture = document.querySelector("#profile-image");
+        picture.src = `https://mmi.unilim.fr/~mande3/SAE2.03-Arthur-Mande-1/server/images/${imageFilename}`;
+
+        // Remplir les autres champs du formulaire
+        document.querySelector("#profile-name").value = profileName;
+        document.querySelector("#profile-dob").value = dob;
       };
 
 
@@ -63,6 +90,7 @@
         V.renderForm("C.handlerAdd()");
         V.renderFormProfil("C.handlerAddProfil()");
         V.renderChangeProfil("C.handlerchangeProfil()", "C.handlerProfil()");
+        C.loadProfiles();
       }
         
       window.V = {};
