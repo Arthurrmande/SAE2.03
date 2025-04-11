@@ -144,3 +144,52 @@ function changeControllerProfil(){
     return "Aucune modification effectuée.";
   }
 }
+
+function addControllerLike(){
+  $profil = $_REQUEST['id_profil'] ?? null;
+  $movie = $_REQUEST['id_movie'] ?? null;
+  
+  if (empty($profil) || empty($movie)) {
+    return "Erreur : Tous les champs doivent être remplis.";
+  }
+  
+  $ok = addLike($profil, $movie);
+  
+  if ($ok != 0){
+    return "L'utilisateur $profil a ajouté le film $movie dans ses favoris avec succès !";
+  } 
+  else{
+    return "Erreur lors de l'ajout de $movie dans les favoris de l'utilisateur $profil !";
+  }
+}
+
+function readControllerLikesUserMovie(){
+  $profil = $_REQUEST['profil'] ?? null;
+
+  if (empty($profil)) {
+      return "Erreur : Le champ profil doit être rempli.";
+  }
+
+  return getLikes($profil);
+}
+
+
+
+
+// function deleteControllerLike(){
+//   $profil = $_REQUEST['profil'] ?? null;
+//   $movie = $_REQUEST['movie'] ?? null;
+
+//   if (empty($profil) || empty($movie)) {
+//       return "Erreur : Tous les champs doivent être remplis.";
+//   }
+
+//   $ok = deleteLikes($profil, $movie);
+    
+//   if ($ok!=0){
+//     return "L'utilisateur $profil a supprimé le film $movie avec succès !";
+//   } 
+//   else{
+//     return "Erreur lors de la suppression de l'utilisateur $profil !";
+//   }
+// }

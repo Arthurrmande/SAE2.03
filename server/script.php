@@ -95,6 +95,19 @@ if ( isset($_REQUEST['todo']) ){
       $data = changeControllerProfil();
       break;
 
+    case 'addLike':
+      $data = addControllerLike();
+      break;
+        
+    case 'getLikes':
+      $data = readControllerLikesUserMovie();
+      break;
+
+    // case 'deleteLike':
+    //   $data = deleteControllerLike();
+    //   break;
+    
+
     default: // il y a un paramètre todo mais sa valeur n'est pas reconnue/supportée
       echo json_encode('[error] Unknown todo value');
       http_response_code(400); // 400 == "Bad request"

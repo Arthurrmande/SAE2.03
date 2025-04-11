@@ -7,4 +7,6 @@ DataProfile.read = async function () {
   let profil = await answer.json();
   return profil;
 }
+
+
 export {DataProfile};
