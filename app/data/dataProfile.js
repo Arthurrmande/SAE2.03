@@ -8,5 +8,4 @@ DataProfile.read = async function () {
   return profil;
 }
 
-
 export {DataProfile};

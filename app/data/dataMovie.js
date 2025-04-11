@@ -34,6 +34,7 @@ DataMovie.requestMovieagecategory = async function (categorie, age) {
   return movies;
 };
 
-// On exporte la fonction DataMovie.requestMovies
+
+
 export { DataMovie };
 
