@@ -26,6 +26,8 @@
       import { Moviecategorie } from "./component/Moviecategorie/script.js";
 
       import { DataProfile } from "./data/dataProfile.js";
+
+      import { BarRecherche } from "./component/BarRecherche/script.js";
       
 
       // Controleur
@@ -163,6 +165,15 @@
         V.render_mea(data);
       };
 
+      C.handlerBardeRecherche = async function (valeur) {
+        if (!valeur || valeur.trim().length === 0) {
+          return C.getMovie(); 
+        }
+
+        const results = await DataMovie.bar_rechercheController(valeur);
+        V.renderMovie(results);
+      };
+
 
       // Vue (contient tout ce qui est relatif à l'affichage)
       window.V = {};
@@ -178,9 +189,14 @@
       V.renderNavBar = async function (hAbout) {
         let header = document.querySelector("#header");
         let profiles = await DataProfile.read();
-        header.innerHTML = NavBar.format(hAbout, "C.handlerProfile()", profiles,
-          "C.handlerfavoris()"
-        );
+        header.innerHTML = NavBar.format(
+        hAbout,
+        "C.handlerProfile()",
+        profiles,
+        "C.handlerfavoris()",
+        BarRecherche
+      );
+
       };
 
       V.renderMovie = function (data) {
@@ -205,6 +221,8 @@
         let content = document.querySelector("#mise_en_avant");
         content.innerHTML = Movie.format(data);
       };
+
+
 
       C.start(); // Démarre l'application
     </script>
