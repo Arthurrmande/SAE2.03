@@ -31,18 +31,15 @@ DataProfile.requestGetfavoris = async function (id_Profil) {
 };
 
 
-// DataProfile.deleteLike = async function (id_profil, id_movie) {
-//   const fd = new FormData();
-//   fd.append("id_profil", id_profil);
-//   fd.append("id_movie", id_movie);
+DataProfile.deleteLike = async function (id_profil, id_movie) {
+  const fd = new FormData();
+  fd.append("id_profil", id_profil);
+  fd.append("id_movie", id_movie);
   
-//   const res = await fetch(HOST_URL + "/server/script.php?todo=deleteLike", {
-//     method: "POST",
-//     body: fd,
-//   });
+  const res = await fetch(HOST_URL + "/server/script.php?todo=deleteLike&id_profil=" + id_profil + "&id_movie=" + id_movie,);
 
-//   return await res.json();
-// }
+  return await res.json();
+}
 
 
 

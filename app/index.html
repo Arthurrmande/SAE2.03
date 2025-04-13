@@ -140,6 +140,18 @@
         V.renderMovie(movies);
       };
 
+      C.handlerdelfav = async function (idMovie) {
+        const select = document.querySelector("#profile-select");
+        const selectedOption = select.selectedOptions[0];
+        const idProfil = selectedOption.getAttribute("data-id");
+
+        if (!idProfil) {
+          alert("Aucun profil sélectionné !");
+          return;
+        }
+        await DataProfile.deleteLike(idProfil, idMovie);
+        alert("Film supprimé des favoris !");
+      };
 
 
       // Vue (contient tout ce qui est relatif à l'affichage)

@@ -174,19 +174,19 @@ function readControllerLikesUserMovie(){
 }
 
 function deleteControllerLike(){
-  $profil = $_REQUEST['profil'] ?? null;
-  $movie = $_REQUEST['movie'] ?? null;
+  $profil = $_REQUEST['id_profil'] ?? null;
+  $movie = $_REQUEST['id_movie'] ?? null;
 
   if (empty($profil) || empty($movie)) {
       return "Erreur : Tous les champs doivent être remplis.";
   }
 
-  $ok = deleteLikes($profil, $movie);
+  $ok = deleteLike($profil, $movie);
     
   if ($ok!=0){
-    return "L'utilisateur $profil a supprimé le film $movie avec succès !";
+    return "L'utilisateur $profil a supprimé le film $movie de ses favoris avec succès !";
   } 
   else{
-    return "Erreur lors de la suppression de l'utilisateur $profil !";
+    return "Erreur lors de la suppression du film dans les favoris de l'utilisateur $profil !";
   }
 }

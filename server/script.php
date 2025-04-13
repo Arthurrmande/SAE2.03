@@ -103,9 +103,9 @@ if ( isset($_REQUEST['todo']) ){
       $data = readControllerLikesUserMovie();
       break;
 
-    // case 'deleteLike':
-    //   $data = deleteControllerLike();
-    //   break;
+    case 'deleteLike':
+      $data = deleteControllerLike();
+      break;
     
 
     default: // il y a un paramètre todo mais sa valeur n'est pas reconnue/supportée
