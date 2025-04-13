@@ -218,3 +218,19 @@ function getMise_en_avant(){
 
     return $res;
 }
+
+function bar_recherche($valeurs){
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    $sql = "SELECT Movie.id, Movie.name, Movie.image, Movie.year, Movie.min_age, Movie.description, Movie.mise_en_avant, Category.name
+            FROM Movie
+            INNER JOIN Category ON Movie.id_category = Category.id
+            WHERE Movie.name LIKE :titre OR Category.name LIKE :titre OR year LIKE :titre";
+
+    $stmt = $cnx->prepare($sql);
+    $val = '%' . $valeurs . '%';
+    $stmt->bindParam(':titre', $val);
+    $stmt->execute();
+    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+    return $res;
+}

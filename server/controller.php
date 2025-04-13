@@ -195,3 +195,11 @@ function meaController(){
   $movies = getMise_en_avant();
   return $movies;
 }
+
+function bar_rechercheController(){
+  $titre = $_REQUEST['titre'] ?? null;
+  if (empty($titre))
+    return false;
+  return bar_recherche($titre);
+}
+

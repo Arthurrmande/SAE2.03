@@ -110,6 +110,10 @@ if ( isset($_REQUEST['todo']) ){
     case 'getMise_en_avant':
       $data = meaController();
       break;
+
+    case 'bar_recherche':
+      $data = bar_rechercheController();
+      break;
     
 
     default: // il y a un paramètre todo mais sa valeur n'est pas reconnue/supportée
