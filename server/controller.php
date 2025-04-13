@@ -164,7 +164,7 @@ function addControllerLike(){
 }
 
 function readControllerLikesUserMovie(){
-  $profil = $_REQUEST['profil'] ?? null;
+  $profil = $_REQUEST['id_profil'] ?? null;
 
   if (empty($profil)) {
       return "Erreur : Le champ profil doit être rempli.";
@@ -173,23 +173,20 @@ function readControllerLikesUserMovie(){
   return getLikes($profil);
 }
 
+function deleteControllerLike(){
+  $profil = $_REQUEST['profil'] ?? null;
+  $movie = $_REQUEST['movie'] ?? null;
 
+  if (empty($profil) || empty($movie)) {
+      return "Erreur : Tous les champs doivent être remplis.";
+  }
 
-
-// function deleteControllerLike(){
-//   $profil = $_REQUEST['profil'] ?? null;
-//   $movie = $_REQUEST['movie'] ?? null;
-
-//   if (empty($profil) || empty($movie)) {
-//       return "Erreur : Tous les champs doivent être remplis.";
-//   }
-
-//   $ok = deleteLikes($profil, $movie);
+  $ok = deleteLikes($profil, $movie);
     
-//   if ($ok!=0){
-//     return "L'utilisateur $profil a supprimé le film $movie avec succès !";
-//   } 
-//   else{
-//     return "Erreur lors de la suppression de l'utilisateur $profil !";
-//   }
-// }
+  if ($ok!=0){
+    return "L'utilisateur $profil a supprimé le film $movie avec succès !";
+  } 
+  else{
+    return "Erreur lors de la suppression de l'utilisateur $profil !";
+  }
+}

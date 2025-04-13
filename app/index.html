@@ -112,6 +112,36 @@
         V.renderMovie(Moviestrie);
       };
 
+      C.handlerfavori = async function (idMovie) {
+        const select = document.querySelector("#profile-select");
+        const selectedOption = select.selectedOptions[0];
+        const idProfil = selectedOption.getAttribute("data-id");
+
+        if (!idProfil) {
+          alert("Aucun profil sélectionné !");
+          return;
+        }
+
+        await DataProfile.addLike(idProfil, idMovie);
+        alert("Film ajouté aux favoris !");
+      };
+
+      C.handlerfavoris = async function () {
+        const select = document.querySelector("#profile-select");
+        const selectedOption = select.selectedOptions[0];
+        const idProfil = selectedOption.getAttribute("data-id");
+
+        if (!idProfil) {
+          alert("Aucun profil sélectionné !");
+          return;
+        }
+
+        let movies = await DataProfile.requestGetfavoris(idProfil);
+        V.renderMovie(movies);
+      };
+
+
+
       // Vue (contient tout ce qui est relatif à l'affichage)
       window.V = {};
 
@@ -126,7 +156,9 @@
       V.renderNavBar = async function (hAbout) {
         let header = document.querySelector("#header");
         let profiles = await DataProfile.read();
-        header.innerHTML = NavBar.format(hAbout, "C.handlerProfile()", profiles);
+        header.innerHTML = NavBar.format(hAbout, "C.handlerProfile()", profiles,
+          "C.handlerfavoris()"
+        );
       };
 
       V.renderMovie = function (data) {
@@ -146,6 +178,7 @@
         let categories = await DataMovie.requestCategories();
         container.innerHTML = Moviecategorie.format(categories);
       };
+
 
       C.start(); // Démarre l'application
     </script>

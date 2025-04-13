@@ -172,7 +172,7 @@ function changeProfil($ancienname , $name, $image, $age){
 function addLike($profil, $movie) {
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
 
-    $sql = "INSERT INTO Favoris (id_Profil, id_Movie) VALUES (:id_profil, :id_movie)";
+    $sql = "INSERT INTO Favoris (id_profil, id_movie) VALUES (:id_profil, :id_movie)";
 
     $stmt = $cnx->prepare($sql);
 
@@ -188,23 +188,23 @@ function addLike($profil, $movie) {
 function getLikes($profil) {
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
     
-    $sql = "SELECT * FROM Favoris JOIN Movie ON Favoris.id_Movie = Movie.id WHERE Favoris.id_Profil = :id_Profil";
+    $sql = "SELECT * FROM Favoris JOIN Movie ON Favoris.id_movie = Movie.id WHERE Favoris.id_profil = :id_profil";
     
     $stmt = $cnx->prepare($sql);
-    $stmt->bindParam(':id_Profil', $profil , PDO::PARAM_INT);
+    $stmt->bindParam(':id_profil', $profil , PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ);
 }
 
 
-// function deleteLike($profil, $movie) {
-//     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+function deleteLike($profil, $movie) {
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
 
-//     $sql = "DELETE FROM Favoris WHERE id_Profil = :id_Profil AND id_Movie = :id_Movie";
+    $sql = "DELETE FROM Favoris WHERE id_profil = :id_profil AND id_movie = :id_movie";
 
-//     $stmt = $cnx->prepare($sql);
-//     $stmt->bindParam(':id_Profil', $profil);
-//     $stmt->bindParam(':id_Movie', $movie);
-//     $stmt->execute();
-//     return $stmt->rowCount(); // Retourne le nombre de lignes affectées par l'opération
-// }
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':id_profil', $profil);
+    $stmt->bindParam(':id_movie', $movie);
+    $stmt->execute();
+    return $stmt->rowCount(); // Retourne le nombre de lignes affectées par l'opération
+}
