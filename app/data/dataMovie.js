@@ -34,6 +34,11 @@ DataMovie.requestMovieagecategory = async function (categorie, age) {
   return movies;
 };
 
+DataMovie.requestMovies_mea = async function () {
+  let answer = await fetch(HOST_URL + "/server/script.php?todo=getMise_en_avant");
+  let movies = await answer.json();
+  return movies;
+};
 
 
 export { DataMovie };

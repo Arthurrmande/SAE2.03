@@ -106,6 +106,10 @@ if ( isset($_REQUEST['todo']) ){
     case 'deleteLike':
       $data = deleteControllerLike();
       break;
+
+    case 'getMise_en_avant':
+      $data = meaController();
+      break;
     
 
     default: // il y a un paramètre todo mais sa valeur n'est pas reconnue/supportée

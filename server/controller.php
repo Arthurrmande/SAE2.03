@@ -190,3 +190,8 @@ function deleteControllerLike(){
     return "Erreur lors de la suppression du film dans les favoris de l'utilisateur $profil !";
   }
 }
+
+function meaController(){
+  $movies = getMise_en_avant();
+  return $movies;
+}

@@ -208,3 +208,13 @@ function deleteLike($profil, $movie) {
     $stmt->execute();
     return $stmt->rowCount(); // Retourne le nombre de lignes affectées par l'opération
 }
+
+function getMise_en_avant(){
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    $sql = "SELECT * FROM Movie WHERE mise_en_avant = 1";
+
+    $answer = $cnx->query($sql);
+    $res = $answer->fetchAll(PDO::FETCH_OBJ);
+
+    return $res;
+}
