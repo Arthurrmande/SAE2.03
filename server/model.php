@@ -24,7 +24,7 @@ function getMovie(){
     // Connexion à la base de données
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
     // Requête SQL pour récupérer le nom, l'image et l'id du film
-    $sql = "SELECT id, name, image FROM Movie";
+    $sql = "SELECT id, name AS movie_name, image FROM Movie";
 
     // exécution de la requête SQL via la connexion à la bdd et récupération de la réponse sur serveur MySQL
     $answer = $cnx->query($sql);
@@ -38,7 +38,7 @@ function getMoviebyage($ageLimit = null){
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
 
     if ($ageLimit !== null) {
-        $sql = "SELECT id, name, image FROM Movie WHERE min_age <= :ageLimit";
+        $sql = "SELECT id, name AS movie_name, image FROM Movie WHERE min_age <= :ageLimit";
         $stmt = $cnx->prepare($sql);
         $stmt->bindParam(':ageLimit', $ageLimit, PDO::PARAM_INT);
         $stmt->execute();
@@ -56,31 +56,34 @@ function getMoviebyage($ageLimit = null){
 }
 
 /**
- * Met à jour le menu pour un jour spécifique dans la base de données. 
+ * Met à jour le menu pour un jour spécifique dans la base de données.
  * A SAVOIR: une requête SQL de type update retourne le nombre de lignes affectées par la requête.
  * Si la requête a réussi, le nombre de lignes affectées sera 1.
  * Si la requête a échoué, le nombre de lignes affectées sera 0.
  */
 function addMovie($name, $director, $year, $length, $description, $id_category, $image, $trailer, $min_age){
-    // Connexion à la base de données
-    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD); 
-    $sql = "INSERT INTO Movie (name, director, year, length, description, id_category, image, trailer, min_age) 
-            VALUES (:name, :director, :year, :length, :description, :id_category, :image, :trailer, :min_age)";
-    
-    $stmt = $cnx->prepare($sql);
-    $stmt->bindParam(':name', $name);
-    $stmt->bindParam(':director', $director);
-    $stmt->bindParam(':year', $year);
-    $stmt->bindParam(':length', $length);
-    $stmt->bindParam(':description', $description);
-    $stmt->bindParam(':id_category', $id_category);
-    $stmt->bindParam(':image', $image);
-    $stmt->bindParam(':trailer', $trailer);
-    $stmt->bindParam(':min_age', $min_age);
-    
-    $stmt->execute();
-    $res = $stmt->rowCount();
-    return $res; 
+    try {
+        $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+        $sql = "INSERT INTO Movie (name, director, year, length, description, id_category, image, trailer, min_age) 
+                VALUES (:name, :director, :year, :length, :description, :id_category, :image, :trailer, :min_age)";
+        
+        $stmt = $cnx->prepare($sql);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':director', $director);
+        $stmt->bindParam(':year', $year);
+        $stmt->bindParam(':length', $length);
+        $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':id_category', $id_category, PDO::PARAM_INT);
+        $stmt->bindParam(':image', $image);
+        $stmt->bindParam(':trailer', $trailer);
+        $stmt->bindParam(':min_age', $min_age);
+        
+        $stmt->execute();
+        return $stmt->rowCount();
+    } catch (PDOException $e) {
+        error_log("Erreur PDO dans addMovie : " . $e->getMessage());
+        return false;
+    }
 }
 
 function getMovieDetail($id){
@@ -120,7 +123,7 @@ function getAllCategories() {
 
 function getMoviesagecategory($age, $categorie) {
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
-    $sql = "SELECT Movie.id, Movie.name, Movie.image FROM Movie INNER JOIN Category ON Movie.id_category = Category.id
+    $sql = "SELECT Movie.id, Movie.name AS movie_name, Movie.image FROM Movie INNER JOIN Category ON Movie.id_category = Category.id
             WHERE Movie.min_age <= :age AND LOWER(Category.name) = LOWER(:categorie)";
 
     $stmt = $cnx->prepare($sql);
@@ -221,10 +224,11 @@ function getMise_en_avant(){
 
 function bar_recherche($valeurs){
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    $sql = "SELECT Movie.id, Movie.name, Movie.image, Movie.year, Movie.min_age, Movie.description, Movie.mise_en_avant, Category.name
-            FROM Movie
-            INNER JOIN Category ON Movie.id_category = Category.id
-            WHERE Movie.name LIKE :titre OR Category.name LIKE :titre OR year LIKE :titre";
+    $sql = "SELECT Movie.id, Movie.name AS movie_name, Movie.image, Movie.year, Movie.min_age, Movie.description, Movie.mise_en_avant, Category.name AS category_name
+    FROM Movie
+    INNER JOIN Category ON Movie.id_category = Category.id
+    WHERE Movie.name LIKE :titre OR Category.name LIKE :titre OR year LIKE :titre";
+
 
     $stmt = $cnx->prepare($sql);
     $val = '%' . $valeurs . '%';

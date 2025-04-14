@@ -20,6 +20,9 @@
  */
 require ("model.php");
 
+init_set('display_errors', 1);
+error_reporting(E_ALL);
+
 function readController(){
  
     $movies = getMovie();
@@ -40,22 +43,25 @@ function readControllerbyage(){
 
 function addController(){
 
-  $titre = $_REQUEST['name'] ?? null;
-  $realisateur = $_REQUEST['director'] ?? null;
-  $annee = $_REQUEST['year'] ?? null;
-  $duree = $_REQUEST['length'] ?? null;
-  $desc = $_REQUEST['description'] ?? null;
-  $categorie = $_REQUEST['categorie'] ?? null;
+  $name = $_REQUEST['name'] ?? null;
+  $director = $_REQUEST['director'] ?? null;
+  $year = $_REQUEST['year'] ?? null;
+  $length = $_REQUEST['length'] ?? null;
+  $description = $_REQUEST['description'] ?? null;
+  $id_category = $_REQUEST['id_category'] ?? null;
   $image = $_REQUEST['image'] ?? null;
-  $url = $_REQUEST['trailer'] ?? null;
-  $age = $_REQUEST['min_age'] ?? null;
+  $trailer = $_REQUEST['trailer'] ?? null;
+  $min_age = $_REQUEST['min_age'] ?? null;
 
-  if (empty($titre) || empty($realisateur) || empty($annee) || empty($duree) || empty($desc) || empty($categorie) || empty($image) || empty($url) || empty($age)) {
-    return "Erreur : Tous les champs doivent être remplis.";
+  // Vérification des champs requis
+  error_log("tentative d'ajout name=$name, id_category=$id_category");
+
+ 
+  if ($name === null || $director === null || $year === null || $length === null || $description === null || $id_category === null || $image === null || $trailer === null || $min_age === null) {    return "Erreur : Tous les champs doivent être remplis. $id_category"; ;
   }
 
   // Mise à jour du menu à l'aide de la fonction addMovie décrite dans model.php
-  $ok = addMovie($titre, $realisateur, $annee, $duree, $desc, $categorie, $image, $url, $age);
+  $ok = addMovie($name, $director, $year, $length, $description, $id_category, $image, $trailer, $min_age);
   // $ok est le nombre de ligne affecté par l'opération de mise à jour dans la BDD (voir model.php)
   if ($ok!=0){
     return "Le film a été ajouté avec succès.";

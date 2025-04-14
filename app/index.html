@@ -170,6 +170,7 @@
       C.handlerBardeRecherche = async function (valeur) {
         if (!valeur || valeur.trim().length === 0) {
           return C.getMovie(); 
+          console.log(valeur);
         }
 
         const results = await DataMovie.bar_rechercheController(valeur);
