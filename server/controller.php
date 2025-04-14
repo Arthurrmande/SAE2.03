@@ -209,3 +209,19 @@ function bar_rechercheController(){
   return bar_recherche($titre);
 }
 
+function changeControllerMise_en_avant(){
+  $id = $_REQUEST['id'] ?? null;
+  $mise_en_avant = $_REQUEST['mise_en_avant'] ?? null;
+
+  if ($id === null || $mise_en_avant === null || !is_numeric($id) || !in_array($mise_en_avant, ['0', '1'], true)) {
+    return 'Erreur : Paramètres invalides.';
+  }
+
+  $ok = changeMise_en_avant($id, $mise_en_avant);
+  if ($ok!=0){
+    return "Le film a bien été mis en avant !";
+  } 
+  else{
+    return "Erreur lors de la mise en avant du film !";
+  }
+}

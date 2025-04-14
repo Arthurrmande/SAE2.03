@@ -114,6 +114,10 @@ if ( isset($_REQUEST['todo']) ){
     case 'bar_recherche':
       $data = bar_rechercheController();
       break;
+
+    case 'changeMise_en_avant':
+      $data = changeControllerMise_en_avant();
+      break;
     
 
     default: // il y a un paramètre todo mais sa valeur n'est pas reconnue/supportée

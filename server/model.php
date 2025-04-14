@@ -225,10 +225,7 @@ function getMise_en_avant(){
 function bar_recherche($valeurs){
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
     $sql = "SELECT Movie.id, Movie.name AS movie_name, Movie.image, Movie.year, Movie.min_age, Movie.description, Movie.mise_en_avant, Category.name AS category_name
-    FROM Movie
-    INNER JOIN Category ON Movie.id_category = Category.id
-    WHERE Movie.name LIKE :titre OR Category.name LIKE :titre OR year LIKE :titre";
-
+    FROM Movie INNER JOIN Category ON Movie.id_category = Category.id WHERE Movie.name LIKE :titre OR Category.name LIKE :titre OR year LIKE :titre";
 
     $stmt = $cnx->prepare($sql);
     $val = '%' . $valeurs . '%';
@@ -237,4 +234,15 @@ function bar_recherche($valeurs){
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
 
     return $res;
+}
+
+function changeMise_en_avant($id, $mise_en_avant){
+    $cnx = new PDO('mysql:host=' . HOST . ';dbname=' . DBNAME, DBLOGIN, DBPWD);
+    $sql = 'UPDATE Movie SET mise_en_avant = :mise_en_avant WHERE id = :id';
+
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':mise_en_avant', $mise_en_avant, PDO::PARAM_INT);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->rowCount() > 0;
 }

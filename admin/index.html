@@ -11,6 +11,7 @@
     <section id="addMovie"></section>
     <section id="addProfil"></section>
     <section id="changeProfil"></section>
+    <section id="BarRecherche"></section>
 
     <script type="module">
       import { Log } from "./component/Log/script.js";
@@ -18,9 +19,11 @@
       import {NewMovieForm} from './component/NewMovieForm/script.js';
       import {ProfileForm} from "./component/ProfileForm/script.js";
       import {changeProfileForm} from "./component/changeProfileForm/script.js";
+      import {BarRecherche} from "./component/BarRecherche/script.js";
       
       import {DataMovie} from './data/dataMovie.js';
       import {DataProfile} from './data/dataProfile.js';
+
 
 
       window.C = {};
@@ -86,12 +89,19 @@
         document.querySelector("#profile-id").value = profileId; // Mettez l'ID dans le champ caché
       };
 
+      C.handlerBardeRecherche = async function (value) {
+        let res = await DataMovie.bar_rechercheController(value);
+        V.renderLog(res);
+        V.renderBarRecherche(res);
+      }
+
 
       C.start = function () {
         V.renderLog("Démarrage de l'application");
         V.renderForm("C.handlerAdd()");
         V.renderFormProfil("C.handlerAddProfil()");
         V.renderChangeProfil("C.handlerchangeProfil()", "C.handlerProfil()");
+        V.renderBarRecherche("C.handlerBardeRecherche()");
         C.loadProfiles();
       }
         
@@ -115,6 +125,11 @@
       V.renderChangeProfil = function(handler) {
         let content = document.querySelector("#changeProfil");
         content.innerHTML = changeProfileForm.format(handler);
+      }
+
+      V.renderBarRecherche = function(handler) {
+        let content = document.querySelector("#BarRecherche");
+        content.innerHTML = BarRecherche.format(handler);
       }
 
 

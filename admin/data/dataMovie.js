@@ -44,5 +44,13 @@ DataMovie.update = async function (fdata) {
     return data;
   };
 
+  DataMovie.bar_rechercheController = async function (valeur) {
+    let answer = await fetch(HOST_URL + "/server/script.php?todo=bar_recherche&titre=" + valeur);
+    let movies = await answer.json();
+    return movies;
+  };
+
+  
+
 
 export {DataMovie};
