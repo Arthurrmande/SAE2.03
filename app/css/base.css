@@ -11,3 +11,4 @@
 @import "../component/MovieDetail/style.css" layer(components);
 @import "../component/Moviecategorie/style.css" layer(components);
 @import "../component/BarRecherche/style.css" layer(components);
+@import "../component/FilmMisenavant/style.css" layer(components);

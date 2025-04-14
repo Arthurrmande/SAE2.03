@@ -28,6 +28,8 @@
       import { DataProfile } from "./data/dataProfile.js";
 
       import { BarRecherche } from "./component/BarRecherche/script.js";
+
+      import { FilmMisenavant } from "./component/FilmMisenavant/script.js";
       
 
       // Controleur
@@ -218,10 +220,9 @@
       };
 
       V.render_mea = function (data) {
-        let content = document.querySelector("#mise_en_avant");
-        content.innerHTML = Movie.format(data);
+        const container = document.querySelector("#mise_en_avant");
+        container.innerHTML = FilmMisenavant.format(data);
       };
-
 
 
       C.start(); // Démarre l'application

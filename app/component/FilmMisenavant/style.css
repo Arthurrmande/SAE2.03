@@ -1,0 +1,15 @@
+.mea{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.mea__image {
+  width: 25%;
+  height: 25%;
+  object-fit: cover;
+  display: block;
+}
