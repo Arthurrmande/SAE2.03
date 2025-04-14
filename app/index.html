@@ -191,14 +191,7 @@
       V.renderNavBar = async function (hAbout) {
         let header = document.querySelector("#header");
         let profiles = await DataProfile.read();
-        header.innerHTML = NavBar.format(
-        hAbout,
-        "C.handlerProfile()",
-        profiles,
-        "C.handlerfavoris()",
-        BarRecherche
-      );
-
+        header.innerHTML = NavBar.format(hAbout,"C.handlerProfile()",profiles,"C.handlerfavoris()",BarRecherche);
       };
 
       V.renderMovie = function (data) {
