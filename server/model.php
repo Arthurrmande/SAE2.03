@@ -62,7 +62,6 @@ function getMoviebyage($ageLimit = null){
  * Si la requête a échoué, le nombre de lignes affectées sera 0.
  */
 function addMovie($name, $director, $year, $length, $description, $id_category, $image, $trailer, $min_age){
-    try {
         $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
         $sql = "INSERT INTO Movie (name, director, year, length, description, id_category, image, trailer, min_age) 
                 VALUES (:name, :director, :year, :length, :description, :id_category, :image, :trailer, :min_age)";
@@ -80,10 +79,7 @@ function addMovie($name, $director, $year, $length, $description, $id_category, 
         
         $stmt->execute();
         return $stmt->rowCount();
-    } catch (PDOException $e) {
-        error_log("Erreur PDO dans addMovie : " . $e->getMessage());
-        return false;
-    }
+    
 }
 
 function getMovieDetail($id){

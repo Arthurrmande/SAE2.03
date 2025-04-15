@@ -18,10 +18,9 @@
  *  Pour pouvoir utiliser les fonctions qui y sont déclarées et qui permettent
  *  de faire des opérations sur les données stockées en base de données.
  */
+
 require ("model.php");
 
-init_set('display_errors', 1);
-error_reporting(E_ALL);
 
 function readController(){
  
@@ -57,7 +56,9 @@ function addController(){
   error_log("tentative d'ajout name=$name, id_category=$id_category");
 
  
-  if ($name === null || $director === null || $year === null || $length === null || $description === null || $id_category === null || $image === null || $trailer === null || $min_age === null) {    return "Erreur : Tous les champs doivent être remplis. $id_category"; ;
+  if ($name === null || $director === null || $year === null || $length === null || $description === null || $id_category === null || $image === null || $trailer === null || $min_age === null) {    
+    echo "Erreur : Tous les champs doivent être remplis. $id_category"; 
+    return false;
   }
 
   // Mise à jour du menu à l'aide de la fonction addMovie décrite dans model.php
@@ -157,6 +158,11 @@ function addControllerLike(){
   
   if (empty($profil) || empty($movie)) {
     return "Erreur : Tous les champs doivent être remplis.";
+  }
+  // Vérification si le film est déjà dans les favoris
+  $existingLike = getLikes($profil);
+  if (in_array($movie, $existingLike)) {
+    return "Erreur : Le film est déjà dans les favoris de l'utilisateur $profil.";
   }
   
   $ok = addLike($profil, $movie);

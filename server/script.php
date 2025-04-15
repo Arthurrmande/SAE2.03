@@ -22,6 +22,10 @@
  * Il contient les fonctions nécessaires pour traiter chaque type de requête
  * et définir la réponnse à renvoyer au client.
  */
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require("controller.php");
 /**
  * Inclusion du fichier model.php.
@@ -54,7 +58,6 @@ if ( isset($_REQUEST['todo']) ){
   // Récupère la valeur du paramètre 'todo' dans le tableau $_REQUEST
   // $_REQUEST est une superglobale qui contient les paramètres de la requête HTTP.
   $todo = $_REQUEST['todo'];
-
   // en fonction de la valeur de 'todo', on appelle la fonction de contrôle appropriée
   // peut s'écrire aussi avec des if/else
   switch($todo){
@@ -67,7 +70,7 @@ if ( isset($_REQUEST['todo']) ){
       $data = readControllerbyage();
       break;
 
-    case 'addMovie': 
+    case 'addMovie':
       $data = addController();
       break;
 
