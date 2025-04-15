@@ -1,20 +1,3 @@
-// let templateFile = await fetch("./component/BarRecherche/template.html");
-// let template = await templateFile.text();
-
-// let BarRecherche = {};
-
-// BarRecherche.format = function () {
-//   return `
-//     <input 
-//       type="text" 
-//       placeholder="Rechercher un film..." 
-//       oninput="C.handlerBardeRecherche(this.value)"
-//     />
-//   `;
-// };
-
-// export { BarRecherche };
-
 let templateFile = await fetch("./component/BarRecherche/template.html");
 let template = await templateFile.text();
 
@@ -37,15 +20,15 @@ BarRecherche.resultat = function (films) {
   for (let i = 0; i < films.length; i++) {
     const film = films[i];
     const recoActuel = film.mise_en_avant == 1;
-    const recoLabel = recoActuel ? "✅ Mis en avant" : "❌ Non mis en avant";
-    const buttonLabel = recoActuel ? "Retirer" : "Mettre en avant";
+    const recoLabel = recoActuel ? "Mis en avant" : "Non mis en avant";
+    const buttonLabel = recoActuel ? "Retirer des mis en avant" : "Mettre le film en avant";
     const nextStatus = recoActuel ? "0" : "1";
-
+    console.log(film);
     const li = document.createElement("li");
     li.className = "BarRecherche__results__item";
     li.innerHTML = `
       <div class="result-item">
-        <strong>${film.name}</strong> (${film.year}) - ${film.category_name}
+        <strong>${film.movie_name}</strong> (${film.year}) - ${film.category_name}
         <br/>
           <span>${recoLabel}</span>
         <br/>

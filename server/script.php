@@ -62,6 +62,7 @@ if ( isset($_REQUEST['todo']) ){
   // peut s'écrire aussi avec des if/else
   switch($todo){
 
+    // GET :
     case 'getMovie': // si la valeur de 'todo' est 'getMovie', on appelle la fonction readController()
       $data = readController();
       break;
@@ -70,58 +71,74 @@ if ( isset($_REQUEST['todo']) ){
       $data = readControllerbyage();
       break;
 
-    case 'addMovie':
-      $data = addController();
-      break;
-
     case 'getMovieDetail':
       $data = readMovieDetailController();
       break; 
-    
+        
     case 'getCategories':
       $data = readControllerCategories();
       break;
-      
+          
     case 'getMoviesagecategory':
       $data = readControllerMoviecategorie(); 
-      break;
-
-    case 'addProfil': 
-      $data = addControllerProfil();
       break;
 
     case 'getProfil':
       $data = readProfilController();
       break;
+            
+    case 'getLikes':
+      $data = readControllerLikesUserMovie();
+      break;
+            
+    case 'getMise_en_avant':
+      $data = meaController();
+      break;
 
-    case 'changeProfil': 
-      $data = changeControllerProfil();
+    case 'getMovieNote':
+      $data = readControllerMovieNote();
+      break;
+    
+
+    // ADD :
+    case 'addProfil': 
+      $data = addControllerProfil();
+      break;
+              
+    case 'addMovie':
+      $data = addController();
       break;
 
     case 'addLike':
       $data = addControllerLike();
       break;
-        
-    case 'getLikes':
-      $data = readControllerLikesUserMovie();
+
+    case 'addMovieNote':
+      $data = addControllerMovieNote();
       break;
 
-    case 'deleteLike':
-      $data = deleteControllerLike();
-      break;
-
-    case 'getMise_en_avant':
-      $data = meaController();
-      break;
-
-    case 'bar_recherche':
-      $data = bar_rechercheController();
+    
+    // CHANGE :
+    case 'changeProfil': 
+      $data = changeControllerProfil();
       break;
 
     case 'changeMise_en_avant':
       $data = changeControllerMise_en_avant();
       break;
     
+    // DELETE :
+    case 'deleteLike':
+      $data = deleteControllerLike();
+      break;
+
+
+    // BARRECHERCHE :  
+    case 'bar_recherche':
+      $data = bar_rechercheController();
+      break;
+    
+
 
     default: // il y a un paramètre todo mais sa valeur n'est pas reconnue/supportée
       echo json_encode('[error] Unknown todo value');
