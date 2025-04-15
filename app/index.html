@@ -46,7 +46,9 @@
       C.handlerDetail = async function (id) {
         let detail = await DataMovie.requestMovieDetails(id);        
         V.renderMovieDetail(detail); 
+        C.stockID = id; // ← CECI est nécessaire pour la notation
       };
+
 
       C.start = async function () {
         await V.renderNavBar("C.handlerMovies()");
@@ -113,6 +115,13 @@
         }
         C.userAge = age; 
 
+        C.profil = {
+          name: profileName,
+          dob: dob,
+          image: imageFilename,
+          id_profil: selectedOption.getAttribute("data-id")
+        };
+
         console.log(age);
         await C.getMise_en_avant(); 
 
@@ -123,15 +132,43 @@
       C.handlerfavori = async function (idMovie) {
         const select = document.querySelector("#profile-select");
         const selectedOption = select.selectedOptions[0];
-        const id_Profil = selectedOption.getAttribute("data-id");
+        const id_profil = selectedOption.getAttribute("data-id");
+
+        if (!id_profil) {
+          alert("Aucun profil sélectionné !");
+          return;
+        }
+
+        await DataProfile.addLike(id_profil, idMovie);
+        alert("Film ajouté aux favoris !");
+      };
+
+      C.handlerfavoris = async function () {
+        const select = document.querySelector("#profile-select");
+        const selectedOption = select.selectedOptions[0];
+        const id_profil = selectedOption.getAttribute("data-id");
+
+        if (!id_profil) {
+          alert("Aucun profil sélectionné !");
+          return;
+        }
+
+        let data = await DataProfile.requestGetfavoris(id_profil);
+        V.renderMovie(data);
+      };
+
+
+      C.handlerdelfav = async function (idMovie) {
+        const select = document.querySelector("#profile-select");
+        const selectedOption = select.selectedOptions[0];
+        const idProfil = selectedOption.getAttribute("data-id");
 
         if (!idProfil) {
           alert("Aucun profil sélectionné !");
           return;
         }
-
-        await DataProfile.addLike(idProfil, idMovie);
-        alert("Film ajouté aux favoris !");
+        await DataProfile.deleteLike(idProfil, idMovie);
+        alert("Film supprimé des favoris !");
       };
 
 
@@ -160,6 +197,9 @@
           alert("Merci de saisir une note entre 0 et 5.");
           return;
         }
+        console.log('C', C);
+        console.log("note", note);
+        console.log("stockID", C.stockID);
         if (!C.stockID) {
           alert("Aucun film sélectionné.");
           return;
@@ -172,8 +212,8 @@
           alert("Veuillez sélectionner un profil avant de noter.");
           return;
         }
-        let result = await DataMovie.addNote(id_movie, C.profil.id_profil, note);
-        alert(result === false ? "Vous avez déjà noté ce film." : "Votre note a été enregistrée.");
+        let result = await DataMovie.addMovieNote(id_movie, C.profil.id_profil, note);
+        alert(result === false ? "Vous avez déjà noté ce film." : "Merci pour votre note !");
       };
 
 
@@ -195,9 +235,11 @@
       };
 
       V.renderMovie = function (data) {
+        console.log("Rendering movies :", data); // <= ajoute ceci
         let content = document.querySelector("#content");
         content.innerHTML = Movie.format(data);
       };
+
 
       V.renderMovieDetail = function (data) {
         if (!data) return;

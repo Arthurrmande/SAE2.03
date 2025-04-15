@@ -246,7 +246,7 @@ function addControllerMovieNote() {
   // Appeler la fonction pour ajouter la note
   $ok = addMovieNote($id_movie, $id_profil, $note);
 
-  if ($ok === false) {
+  if (!$ok) {
       return "Erreur : vous avez déjà noté ce film.";
   }
 

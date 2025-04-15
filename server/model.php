@@ -86,14 +86,24 @@ function addMovie($name, $director, $year, $length, $description, $id_category, 
 
 function getMovieDetail($id){
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+
+    // On récupère les infos du film (sans la moyenne)
     $sql = "SELECT Movie.id, Movie.name, image, description, director, year, length, Category.name AS category_name, min_age, trailer 
-            FROM Movie INNER JOIN Category ON Movie.id_category = Category.id WHERE Movie.id = :id";
+            FROM Movie 
+            INNER JOIN Category ON Movie.id_category = Category.id 
+            WHERE Movie.id = :id";
+
     $stmt = $cnx->prepare($sql);
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
     $res = $stmt->fetch(PDO::FETCH_OBJ);
+
+    // On récupère la note moyenne via la fonction
+    $res->note = getMovieNote($id);
+
     return $res;
 }
+
 
 function getAllCategories() {
     // Connexion à la base de données
@@ -271,5 +281,6 @@ function getMovieNote($id_movie) {
     
     $res = $stmt->fetch(PDO::FETCH_OBJ);
     
-    return $res->moyenne_note;
+    // Arrondir à 1 chiffre après la virgule 
+    return $res->moyenne_note !== null ? round($res->moyenne_note, 1) : null;
 }

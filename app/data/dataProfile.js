@@ -21,13 +21,11 @@ DataProfile.addLike = async function (id_profil, id_movie) {
   return await res.json();
 }
 
-DataProfile.requestGetfavoris = async function (id_Profil) {
-  const fd = new FormData();
-  fd.append("id_Profil", id_Profil);
-
-  const res = await fetch(HOST_URL + "/server/script.php?todo=getLikes&id_profil=" + id_Profil);
-
-  return await res.json();
+DataProfile.requestGetfavoris = async function (id_profil) {
+  const res = await fetch(HOST_URL + "/server/script.php?todo=getLikes&id_profil=" + id_profil);
+  const data = await res.json();
+  console.log("Réponse de getLikes :", data);
+  return data;
 };
 
 
