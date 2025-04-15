@@ -17,6 +17,7 @@ MovieDetail.format = function (movie) {
   detail = detail.replace("{{duree}}", movie.length);
   detail = detail.replace("{{categorie}}", movie.category_name);
   detail = detail.replace("{{age}}", movie.min_age);
+  detail = detail.replace("{{note}}", movie.note);
 
   return detail;
 };

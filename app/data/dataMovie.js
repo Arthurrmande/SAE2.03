@@ -46,5 +46,17 @@ DataMovie.bar_rechercheController = async function (valeur) {
   return movies;
 };
 
+DataMovie.addMovieNote = async function(id_movie, id_profil, note) {
+  let answer = await fetch(HOST_URL + "/server/script.php?todo=addMovieNote&id_movie=" + id_movie + "&id_profil=" + id_profil + "&note=" + note);
+  let data = await answer.json();
+  return data;
+};
+
+DataMovie.getMovieNote = async function(id_movie) {
+  let response = await fetch(HOST_URL + "/server/script.php?todo=getMovieNote&id_movie=" + id_movie);
+  let data = await response.json();
+  return data.notes; 
+};
+
 export { DataMovie };
 

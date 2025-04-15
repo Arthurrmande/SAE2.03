@@ -41,8 +41,4 @@ DataProfile.deleteLike = async function (id_profil, id_movie) {
   return await res.json();
 }
 
-
-
-
-
 export {DataProfile};
