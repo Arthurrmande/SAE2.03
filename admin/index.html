@@ -70,7 +70,7 @@
 
       
       C.handlerProfile = async function () {
-        console.log("ID du profil sélectionné :", );
+        console.log("ID du profil sélectionné :");
         const select = document.querySelector("#profile-select");
         const selectedOption = select.selectedOptions[0];
 
@@ -87,6 +87,7 @@
         document.querySelector("#profile-name").value = profileName;
         document.querySelector("#profile-age").value = age;
         document.querySelector("#profile-id").value = profileId; // Mettez l'ID dans le champ caché
+
       };
 
       C.handlerBardeRecherche = async function (value) {
