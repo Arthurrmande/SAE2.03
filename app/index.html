@@ -162,10 +162,11 @@
       };
 
       C.getMise_en_avant = async function () {
-        const age = C.userAge;
-        const data = await DataMovie.requestMovies_mea(age);
-        V.render_mea(data);
+        const data = await DataMovie.requestMovies_mea();
+        const html = await FilmMisenavant.format(data); // ← on attend la promesse
+        V.render_mea(html);
       };
+
 
       C.handlerBardeRecherche = async function (valeur) {
         if (!valeur || valeur.trim().length === 0) {
@@ -213,10 +214,11 @@
         container.innerHTML = Moviecategorie.format(categories);
       };
 
-      V.render_mea = function (data) {
+      V.render_mea = function (html) {
         const container = document.querySelector("#mise_en_avant");
-        container.innerHTML = FilmMisenavant.format(data);
+        container.innerHTML = html;
       };
+
 
 
       C.start(); // Démarre l'application
