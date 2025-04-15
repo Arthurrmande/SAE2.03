@@ -90,10 +90,23 @@
       };
 
       C.handlerBardeRecherche = async function (value) {
-        let res = await DataMovie.bar_rechercheController(value);
-        V.renderLog(res);
-        V.renderBarRecherche(res);
-      }
+        if (!value || value.trim().length < 2) {
+          BarRecherche.resultat([]);
+          return;
+        }
+        let results = await DataMovie.bar_rechercheController(value);
+        BarRecherche.resultat(results);
+      };
+
+      C.handlerMise_en_avant = async function (id, currentStatus) {
+        const newStatus = currentStatus === "1" ? "0" : "1";
+        let result = await DataMovie.Mise_en_avant(id, newStatus);
+        V.renderLog(result);
+
+        const input = document.querySelector(".BardeRecherche__input");
+        const results = await DataMovie.bar_rechercheController(input.value);
+        BardeRecherche.resultat(results);
+      };
 
 
       C.start = function () {
@@ -101,7 +114,7 @@
         V.renderForm("C.handlerAdd()");
         V.renderFormProfil("C.handlerAddProfil()");
         V.renderChangeProfil("C.handlerchangeProfil()", "C.handlerProfil()");
-        V.renderBarRecherche("C.handlerBardeRecherche()");
+        V.renderBarRecherche();
         C.loadProfiles();
       }
         
@@ -127,9 +140,9 @@
         content.innerHTML = changeProfileForm.format(handler);
       }
 
-      V.renderBarRecherche = function(handler) {
+      V.renderBarRecherche = function() {
         let content = document.querySelector("#BarRecherche");
-        content.innerHTML = BarRecherche.format(handler);
+        content.innerHTML = BarRecherche.format();
       }
 
 

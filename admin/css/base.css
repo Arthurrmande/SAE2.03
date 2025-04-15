@@ -8,3 +8,4 @@
 @import "../component/NewMovieForm/style.css" layer(components);
 @import "../component/ProfileForm/style.css" layer(components);
 @import "../component/changeProfileForm/style.css" layer(components);
+@import "../component/BarRecherche/style.css" layer(components);
