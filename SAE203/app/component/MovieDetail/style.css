@@ -1,96 +1,91 @@
 .details {
-    background-color: #000000;
-    color: var(--color-white);
-    padding: 1rem;
-    border-radius: 1rem;
-    max-width: 100%;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-  }
-  
-  
-  .details__trailer {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    border: none;
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
-  }
-  
-  
-  .details__bottom {
-    display: flex;
-    gap: 1rem;
-  }
-  
-  
-  .details__image {
-    object-fit: cover;
-    border-radius: 0.5rem;
-    width: 120px;
-    height: fit-content;
-  }
-  
-  
-  .details__infos {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  padding: 1rem;
+  border-radius: 1rem;
+  max-width: 100%;
+  box-shadow: 0 0 1.25rem rgba(0, 0, 0, 0.5);
+}
+
+.details__trailer {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: none;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.details__bottom {
+  display: flex;
+  gap: 1rem;
+}
+
+.details__image {
+  object-fit: cover;
+  border-radius: 0.5rem;
+  width: 7.5rem;
+  height: auto;
+}
+
+.details__infos {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.details__info {
+  display: flex;
+  align-items: center;
+}
+
+.details__title {
+  font-size: 1.125rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.details__desc,
+.details__realisateur,
+.details__annee,
+.details__duree,
+.details__categorie,
+.details__age {
+  font-size: 0.5rem;
+  color: var(--color-gray-light);
+}
+
+@media (min-width: 48rem) {
+  .details {
+    padding: 2rem;
+    max-width: 62.5rem;
+    margin: 2rem auto;
   }
 
-  .details__info{
-    display: flex;
-    align-items: center;
+  .details__bottom {
+    flex-direction: row;
+    gap: 2rem;
   }
-  
+
+  .details__image {
+    width: 12.6875rem;
+    height: auto;
+  }
+
+  .details__infos {
+    flex: 1;
+  }
+
   .details__title {
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin: 0;
+    font-size: 2.5rem;
   }
-  
+
   .details__desc,
   .details__realisateur,
   .details__annee,
   .details__duree,
   .details__categorie,
   .details__age {
-    font-size: 0.5rem;
-    color: #ccc;
+    font-size: 1rem;
+    color: var(--color-gray-light);
   }
-  
-  @media (min-width: 768px) {
-    .details {
-      padding: 2rem;
-      max-width: 1000px;
-      margin: 2rem auto;
-    }
-  
-    .details__bottom {
-      flex-direction: row;
-      gap: 2rem;
-    }
-  
-    .details__image {
-      width: 203px;
-      height: auto;
-    }
-  
-    .details__infos {
-      flex: 1;
-    }
-  
-    .details__title {
-      font-size: 2.5rem;
-    }
-
-    .details__desc,
-    .details__realisateur,
-    .details__annee,
-    .details__duree,
-    .details__categorie,
-    .details__age {
-      font-size: 1rem;
-      color: #ccc;
-    }
-  }
-  
+}

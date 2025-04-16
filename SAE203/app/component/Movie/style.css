@@ -18,7 +18,6 @@
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Assombrir l'image au survol */
 .card__film::before {
   content: "";
   position: absolute;
@@ -41,7 +40,6 @@
   display: block;
 }
 
-/* Cacher le titre par défaut */
 .card__title {
   position: absolute;
   font-family: var(--ff-sans);
@@ -56,25 +54,30 @@
   transition: opacity 0.3s ease;
 }
 
-/* Afficher le titre au survol */
 .card__film:hover .card__title {
   opacity: 1;
 }
 
 
-@media (min-width: 768px) {
+@media (min-width: 48rem) {
   .cards {
-    grid-template-columns: repeat(4, 1fr); 
+    grid-template-columns: repeat(7, 1fr); 
     gap: 1.5rem;
-    padding: 2rem;
+    
   }
-
   .card__film {
     border-radius: 8px;
+    height: 18rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .card__image {
-    height: 180px; /* Format plus horizontal */
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    display: block;
   }
 
   .card__title {

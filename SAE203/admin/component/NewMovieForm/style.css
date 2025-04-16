@@ -1,82 +1,74 @@
 body {
-    background-color: #141414;
-    font-family: var(--ff-sans);
-    min-height: 100vh;
-    padding: 2rem;
+  background-color: #141414;
+  font-family: var(--ff-sans);
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.addMovie__title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--color-purple);
+}
+
+.addMovie__form input[type="text"],
+.addMovie__form input[type="number"],
+.addMovie__form select {
+  width: 100%;
+  padding: 0.75rem;
+  margin: 0.375rem 0;
+  border: 0.0625rem solid var(--color-gray-dark);
+  border-radius: 0.3125rem;
+  font-size: 0.9rem;
+  background: var(--color-gray-dark);
+  color: var(--color-fg);
+  transition: all 0.3s ease;
+}
+
+.addMovie__form input[type="text"]::placeholder {
+  color: var(--color-gray-light);
+}
+
+.addMovie__form input[type="text"]:focus,
+.addMovie__form input[type="number"]:focus,
+.addMovie__form select:focus {
+  border-color: var(--color-purple);
+  outline: none;
+}
+
+.addMovie__form input[type="button"] {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.625rem;
+  background: var(--color-purple);
+  color: var(--color-fg);
+  border: none;
+  border-radius: 0.3125rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+  transition: background 0.3s ease;
+}
+
+.addMovie__form input[type="button"]:hover {
+  background: var(--color-purple-black);
+}
+
+@media (min-width: 48rem) {
+  .addMovie__title {
+    font-size: 1.5rem;
   }
 
-  /* Titre */
-  .addMovie__title {
-    font-size: 1.3em;
-    font-weight: bold;
-    margin-bottom: 15px;
-    color: #5400fc; 
-  }
-  
-  /* Champs de formulaire */
   .addMovie__form input[type="text"],
   .addMovie__form input[type="number"],
-  .addMovie__form select{
-    width: 100%;
-    padding: 12px;
-    margin: 6px 0;
-    border: 1px solid #333;
-    border-radius: 5px;
-    font-size: 0.9em;
-    background: #222;
-    color: #fff;
-    transition: all 0.3s ease;
+  .addMovie__form select {
+    font-size: 1rem;
+    padding: 0.875rem;
   }
-  
-  .addMovie__form input[type="text"]::placeholder{
-    color: #aaa;
-  }
-  
-  .addMovie__form input[type="text"]:focus ,
-  .addMovie__form input[type="number"]:focus,
-  .addMovie__form select:focus{
-    border-color: #5400fc;
-    outline: none;
-  }
-  
-  /* Bouton stylé */
-  .addMovie__form input[type="button"] {
-    width: 100%;
-    padding: 12px;
-    margin-top: 10px;
-    background: #5400fc;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: bold;
-    transition: background 0.3s ease;
-  }
-  
-  .addMovie__form input[type="button"]:hover {
-    background: #3900aa;
-  }
-  
 
-  @media (min-width: 768px) {
-  
-    .addMovie__title {
-      font-size: 1.5em;
-    }
-  
-    .addMovie__form input[type="text"],
-    .addMovie__form input[type="number"],
-    .addMovie__form select{
-      font-size: 1em;
-      padding: 14px;
-    }
-  
-    .addMovie__form input[type="button"],
-    .addMovie__form input[type="number"],
-    .addMovie__form select{
-      font-size: 1.1em;
-      padding: 14px;
-    }
+  .addMovie__form input[type="button"] {
+    font-size: 1.1rem;
+    padding: 0.875rem;
   }
-  
+}
