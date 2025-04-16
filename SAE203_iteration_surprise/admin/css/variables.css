@@ -13,6 +13,6 @@
 
   /* Sementic Tokens */
   --color-fg: var(--color-white);
-  --color-bg: var(--color-dark);
+  --color-bg: var(--color-black);
   --color-accent: var(--color-yellow);
 }
