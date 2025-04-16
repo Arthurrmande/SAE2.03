@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <title>SAE2.03 ADMIN</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/base.css" />
+  </head>
+  <body>
+    <section id="log"></section>
+    <section id="addMovie"></section>
+    <section id="addProfil"></section>
+    <section id="changeProfil"></section>
+    <section id="BarRecherche"></section>
+
+    <script type="module">
+      import { Log } from "./component/Log/script.js";
+
+      import {NewMovieForm} from './component/NewMovieForm/script.js';
+      import {ProfileForm} from "./component/ProfileForm/script.js";
+      import {changeProfileForm} from "./component/changeProfileForm/script.js";
+      import {BarRecherche} from "./component/BarRecherche/script.js";
+      
+      import {DataMovie} from './data/dataMovie.js';
+      import {DataProfile} from './data/dataProfile.js';
+
+
+
+      window.C = {};
+      
+      C.handlerAdd = async function(){
+          let form = document.querySelector('.addMovie__form');
+          let fd = new FormData(form);
+          let res = await DataMovie.add(fd);
+          V.renderLog(res);
+      }
+
+      C.handlerAddProfil = async function(){
+        let form = document.querySelector('.addProfil__form');
+        let fd = new FormData(form);
+        let res = await DataProfile.addProfil(fd);
+        V.renderLog(res);
+      }
+
+      C.handlerchangeProfil = async function(){
+        let form = document.querySelector('.changeProfil__form');
+        let fd = new FormData(form);
+        let res = await DataProfile.changeProfil(fd);
+        V.renderLog(res);
+      }
+
+      // Fonction pour charger les profils
+      C.loadProfiles = async function() {
+        const profiles = await DataProfile.getProfil(); // Récupérer les profils depuis le backend (vous devez définir cette fonction dans DataProfile)
+
+        // Sélectionner le `<select>` et vider son contenu
+        const select = document.querySelector("#profile-select");
+        select.innerHTML = ''; // Vider le contenu existant
+
+        // Remplir le select avec les options de profils
+        profiles.forEach(profile => {
+          let option = document.createElement("option");
+          option.value = profile.name;  // Nom du profil
+          option.setAttribute("data-age", profile.age);  // Date de naissance
+          option.setAttribute("data-img", profile.image);  // Avatar de l'image
+          option.innerText = profile.name;  // Texte visible dans l'option
+          select.appendChild(option);
+        });
+      };
+
+      
+      C.handlerProfile = async function () {
+        console.log("ID du profil sélectionné :");
+        const select = document.querySelector("#profile-select");
+        const selectedOption = select.selectedOptions[0];
+
+        const profileName = selectedOption.value;
+        const age = selectedOption.getAttribute("data-age");
+        const imageFilename = selectedOption.getAttribute("data-img");
+        const profileId = selectedOption.getAttribute("data-id"); // Récupère l'ID du profil sélectionné
+
+        // Mettre à jour l'image du profil
+        const picture = document.querySelector("#profile-image");
+        picture.src = `https://mmi.unilim.fr/~mande3/SAE2.03-Arthur-Mande-1/server/images/${imageFilename}`;
+
+        // Remplir les autres champs du formulaire
+        document.querySelector("#profile-name").value = profileName;
+        document.querySelector("#profile-age").value = age;
+        document.querySelector("#profile-id").value = profileId; // Mettez l'ID dans le champ caché
+
+      };
+
+      C.handlerBardeRecherche = async function (value) {
+        if (!value || value.trim().length < 2) {
+          BarRecherche.resultat([]);
+          return;
+        }
+        let results = await DataMovie.bar_rechercheController(value);
+        BarRecherche.resultat(results);
+      };
+
+      C.handlerMise_en_avant = async function (id, currentStatus) {
+        const newStatus = currentStatus === "1" ? "0" : "1";
+        let result = await DataMovie.Mise_en_avant(id, newStatus);
+        V.renderLog(result);
+
+        const input = document.querySelector(".BardeRecherche__input");
+        const results = await DataMovie.bar_rechercheController(input.value);
+        BardeRecherche.resultat(results);
+      };
+
+
+      C.start = function () {
+        V.renderLog("Démarrage de l'application");
+        V.renderForm("C.handlerAdd()");
+        V.renderFormProfil("C.handlerAddProfil()");
+        V.renderChangeProfil("C.handlerchangeProfil()", "C.handlerProfil()");
+        V.renderBarRecherche();
+        C.loadProfiles();
+      }
+        
+      window.V = {};
+
+      V.renderLog = function(txt) {
+        let content = document.querySelector("#log");
+        content.innerHTML = Log.format(txt);
+      }
+
+      V.renderForm = function(handler) {
+        let content = document.querySelector("#addMovie");
+        content.innerHTML = NewMovieForm.format(handler);
+      }
+
+      V.renderFormProfil = function(handler) {
+        let content = document.querySelector("#addProfil");
+        content.innerHTML = ProfileForm.format(handler);
+      }
+
+      V.renderChangeProfil = function(handler) {
+        let content = document.querySelector("#changeProfil");
+        content.innerHTML = changeProfileForm.format(handler);
+      }
+
+      V.renderBarRecherche = function() {
+        let content = document.querySelector("#BarRecherche");
+        content.innerHTML = BarRecherche.format();
+      }
+
+
+      C.start();
+    </script>
+  </body>
+</html>

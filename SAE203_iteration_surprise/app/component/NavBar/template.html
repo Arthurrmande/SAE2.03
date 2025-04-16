@@ -1,0 +1,13 @@
+<nav class="navbar font-sans">
+  <ul class="navbar__list">
+    <li class="navbar__item" onclick="{{hAbout}}">Accueil</li>
+    <li class="navbar__item" onclick="{{handlerfavoris}}">Favoris</li>
+  </ul>
+  {{BarRecherche}}
+  <div class="navbar__profile">
+    <img id="profile-picture" class="navbar__picture" src="https://mmi.unilim.fr/~mande3/SAE2.03-Arthur-Mande-1/server/images/{{image}}" alt="Photo de profil"/>
+    <select id="profile-select" class="navbar__select" onchange={{hProfile}}>
+      {{options}}
+    </select>
+  </div>
+</nav>

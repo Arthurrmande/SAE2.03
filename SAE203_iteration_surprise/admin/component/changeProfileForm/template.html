@@ -1,0 +1,18 @@
+<div class="changeProfil">
+  <h4 class="changeProfil__title"># Modifier un profil</h4>
+  
+  <form class="changeProfil__form">
+    <!-- Le select pour choisir le profil -->
+    <select id="profile-select" name="ancienname" onchange="C.handlerProfile()">
+      <!-- Options seront ajoutées dynamiquement ici -->
+    </select>
+  
+    <input required type="text" name="name" id="profile-name" placeholder="Saisir un nom" />
+    <input required type="text" name="image" id="profile-image" placeholder="Url de l'avatar"/>
+    <input required type="date" name="age" id="profile-age" placeholder="Saisir une date de naissance"/>
+    
+    <button type="button" onclick="C.handlerchangeProfil()">Modifier</button>
+
+  </form>
+</div>
+

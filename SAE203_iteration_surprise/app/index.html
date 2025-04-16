@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <title>SAE2.03 APP</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/base.css" />
+  </head>
+
+  <body>
+    <header id="header"></header>
+
+    <section class="mise_en_avant" id="mise_en_avant"></section>
+    <section class="categorie"></section>
+    <section class="toto" id="toto"></section>
+    <section class="cards" id="content"></section>
+    
+    <script type="module">
+      // Importation de la NavBar
+      import { NavBar } from "./component/NavBar/script.js";
+
+      import { DataMovie } from "./data/dataMovie.js";
+      import { Movie } from "./component/Movie/script.js";
+
+      import { MovieDetail } from "./component/MovieDetail/script.js";
+      import { Moviecategorie } from "./component/Moviecategorie/script.js";
+
+      import { DataProfile } from "./data/dataProfile.js";
+
+      import { BarRecherche } from "./component/BarRecherche/script.js";
+
+      import { FilmMisenavant } from "./component/FilmMisenavant/script.js";
+      
+
+      // Controleur
+      // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
+      // Une fois l'application terminée, on pourrait remettre let C.
+      window.C = {};
+
+      C.userAge = null; 
+
+      C.handlerMovies = function () {
+        C.getMovie(); 
+      };
+
+      C.handlerDetail = async function (id) {
+        let detail = await DataMovie.requestMovieDetails(id);        
+        V.renderMovieDetail(detail); 
+        C.stockID = id; // ← CECI est nécessaire pour la notation
+      };
+
+
+      C.start = async function () {
+        await V.renderNavBar("C.handlerMovies()");
+        V.renderMovieCategorie();
+        C.getMovie();
+        C.getMise_en_avant();
+
+        // On appelle un premier profile par défaut
+        C.handlerProfile();
+      };
+
+      /* C.getMovie
+
+        La fonction affiche sur la page la collection de films par défaut
+      */
+
+      C.getMovie = async function () {
+        let detailssection = document.querySelector("#toto");
+        detailssection.innerHTML = "";
+
+        let data;
+        if (C.userAge !== null) {
+          data = await DataMovie.requestMoviesbyage(C.userAge);
+        } else {
+          data = await DataMovie.requestMovies();
+        }
+
+        V.renderMovie(data); 
+      };
+
+      C.handlerCategorie = async function (categorie) {
+        console.log("Catégorie sélectionnée :", categorie);
+
+        let data;
+
+        if (C.userAge !== null) {
+          data = await DataMovie.requestMovieagecategory(categorie, C.userAge);
+        } else {
+          data = await DataMovie.requestMoviecategorie(categorie);
+        }
+
+        V.renderMovie(data);
+      };
+
+
+      C.handlerProfile = async function () {
+        const select = document.querySelector("#profile-select");
+        const selectedOption = select.selectedOptions[0];
+
+        const profileName = selectedOption.value;
+        const dob = selectedOption.getAttribute("data-dob");
+        const imageFilename = selectedOption.getAttribute("data-img");
+        const picture = document.querySelector("#profile-picture");
+        const base = "https://mmi.unilim.fr/~mande3/SAE2.03-Arthur-Mande-1/server/images/";
+        picture.src = base + imageFilename;
+
+        // Calcul de l'âge
+        let birthDate = new Date(dob);
+        let today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        let m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+          age--;
+        }
+        C.userAge = age; 
+
+        C.profil = {
+          name: profileName,
+          dob: dob,
+          image: imageFilename,
+          id_profil: selectedOption.getAttribute("data-id")
+        };
+
+        console.log(age);
+        await C.getMise_en_avant(); 
+
+        let Moviestrie = await DataMovie.requestMoviesbyage(age);
+        V.renderMovie(Moviestrie);
+      };
+
+      C.handlerfavori = async function (idMovie) {
+        const select = document.querySelector("#profile-select");
+        const selectedOption = select.selectedOptions[0];
+        const id_profil = selectedOption.getAttribute("data-id");
+
+        if (!id_profil) {
+          alert("Aucun profil sélectionné !");
+          return;
+        }
+
+        await DataProfile.addLike(id_profil, idMovie);
+        alert("Film ajouté aux favoris !");
+      };
+
+      C.handlerfavoris = async function () {
+        const select = document.querySelector("#profile-select");
+        const selectedOption = select.selectedOptions[0];
+        const id_profil = selectedOption.getAttribute("data-id");
+
+        if (!id_profil) {
+          alert("Aucun profil sélectionné !");
+          return;
+        }
+
+        let data = await DataProfile.requestGetfavoris(id_profil);
+        V.renderMovie(data);
+      };
+
+
+      C.handlerdelfav = async function (idMovie) {
+        const select = document.querySelector("#profile-select");
+        const selectedOption = select.selectedOptions[0];
+        const idProfil = selectedOption.getAttribute("data-id");
+
+        if (!idProfil) {
+          alert("Aucun profil sélectionné !");
+          return;
+        }
+        await DataProfile.deleteLike(idProfil, idMovie);
+        alert("Film supprimé des favoris !");
+      };
+
+
+      C.getMise_en_avant = async function () {
+        const data = await DataMovie.requestMovies_mea();
+        const html = await FilmMisenavant.format(data); // ← on attend la promesse
+        V.render_mea(html);
+      };
+
+
+      C.handlerBardeRecherche = async function (valeur) {
+        if (!valeur || valeur.trim().length === 0) {
+          return C.getMovie(); 
+          console.log(valeur);
+        }
+
+        const results = await DataMovie.bar_rechercheController(valeur);
+        V.renderMovie(results);
+      };
+
+
+      C.Noter = function (event) {
+        let note = document.querySelector('.Note_form').value;
+
+        if (note < 0 || note > 5) {
+          alert("Merci de saisir une note entre 0 et 5.");
+          return;
+        }
+        console.log('C', C);
+        console.log("note", note);
+        console.log("stockID", C.stockID);
+        if (!C.stockID) {
+          alert("Aucun film sélectionné.");
+          return;
+        }
+        C.handlerAddNote(C.stockID, note);
+      };
+
+      C.handlerAddNote = async function (id_movie, note) {
+        if (!C.profil) {
+          alert("Veuillez sélectionner un profil avant de noter.");
+          return;
+        }
+        let result = await DataMovie.addMovieNote(id_movie, C.profil.id_profil, note);
+        alert(result === false ? "Vous avez déjà noté ce film." : "Merci pour votre note !");
+      };
+
+
+      // Vue (contient tout ce qui est relatif à l'affichage)
+      window.V = {};
+
+      /**
+       * V.renderNavBar
+       *
+       * Cette fonction est responsable de l'affichage de la barre de navigation (NavBar).
+       * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
+       * formaté par le composant NavBar.
+       */
+
+      V.renderNavBar = async function (hAbout) {
+        let header = document.querySelector("#header");
+        let profiles = await DataProfile.read();
+        header.innerHTML = NavBar.format(hAbout,"C.handlerProfile()",profiles,"C.handlerfavoris()",BarRecherche);
+      };
+
+      V.renderMovie = function (data) {
+        console.log("Rendering movies :", data); // <= ajoute ceci
+        let content = document.querySelector("#content");
+        content.innerHTML = Movie.format(data);
+      };
+
+
+      V.renderMovieDetail = function (data) {
+        if (!data) return;
+        let content = document.querySelector("#toto");
+        console.log("data", data);
+        content.innerHTML = MovieDetail.format(data);
+      };
+
+      V.renderMovieCategorie = async function () {
+        let container = document.querySelector(".categorie");
+        let categories = await DataMovie.requestCategories();
+        container.innerHTML = Moviecategorie.format(categories);
+      };
+
+      V.render_mea = function (html) {
+        const container = document.querySelector("#mise_en_avant");
+        container.innerHTML = html;
+      };
+
+
+      C.start(); // Démarre l'application
+    </script>
+  </body>
+</html>
+<script type="module"></script>

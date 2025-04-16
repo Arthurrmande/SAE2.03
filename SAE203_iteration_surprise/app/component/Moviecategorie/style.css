@@ -1,0 +1,77 @@
+/* .categorie {
+    background-color: var(--color-black);
+    color: var(--color-white);
+    padding: 1rem;
+    border-bottom: 1px solid var(--color-gray-dark);
+  } */
+  
+  .categorie__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+  }
+  
+
+
+    /* Bordure du bloc principal */
+.categorie {
+    background-color: var(--color-black);
+    color: var(--color-white);
+    padding: 1rem;
+    /* border-bottom: 1px solid var(--color-gray-dark); <-- SUPPRIMER cette ligne */
+  }
+  
+  /* Bordure des tags individuels */
+  .categorie__tag {
+    background-color: var(--color-purple);
+    color: var(--color-white);
+    padding: 0.5rem 1rem;
+    /* border: 1px solid var(--color-gray-dark); <-- SUPPRIMER cette ligne */
+    border-radius: 2rem;
+    font-family: var(--ff-sans);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border 0.3s;
+  }
+  
+
+  /* .categorie__tag {
+    background-color: var(--color-purple-black);
+    color: var(--color-white);
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--color-gray-dark);
+    border-radius: 2rem;
+    font-family: var(--ff-sans);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border 0.3s;
+  } */
+  
+  .categorie__tag:hover,
+  .categorie__tag.active {
+    background-color: var(--color-purple-black);
+    color: var(--color-white);
+    border-color: var(--color-purple-black);
+  }
+  
+  @media (min-width: 768px) {
+    .categorie {
+      padding: 1.5rem 2rem;
+    }
+  
+    .categorie__list {
+      gap: 1rem;
+    }
+  
+    .categorie__tag {
+      font-size: 1rem;
+      padding: 0.6rem 1.2rem;
+    }
+  }

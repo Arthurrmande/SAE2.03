@@ -1,0 +1,79 @@
+  /* Titre */
+  .addProfil__title {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #5400fc; 
+  }
+  
+  /* Champs de formulaire */
+  .addProfil__form input[type="text"],
+  .addProfil__form input[type="date"],
+  .addProfil__form select{
+    width: 100%;
+    padding: 12px;
+    margin: 6px 0;
+    border: 1px solid #333;
+    border-radius: 5px;
+    font-size: 0.9em;
+    background: #222;
+    color: #fff;
+    transition: all 0.3s ease;
+  }
+  
+  .addProfil__form input[type="text"]::placeholder{
+    color: #aaa;
+  }
+  
+  .addProfil__form input[type="text"]:focus ,
+  .addProfil__form input[type="date"]:focus,
+  .addProfil__form select:focus{
+    border-color: #5400fc;
+    outline: none;
+  }
+  
+  /* Bouton stylé */
+  .addProfil__form button[type="button"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background: #5400fc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background 0.3s ease;
+  }
+  
+  .addProfil__form button[type="button"]:hover {
+    background: #3900aa;
+  }
+  
+
+  @media (min-width: 768px) {
+    .addMovie {
+      max-width: 400px;
+      padding: 25px;
+    }
+  
+    .addMovie__title {
+      font-size: 1.5em;
+    }
+  
+    .addProfil__form input[type="text"],
+    .addProfil__form input[type="date"],
+    .addProfil__form select{
+      font-size: 1em;
+      padding: 14px;
+    }
+  
+    .addProfil__form input[type="button"],
+    .addProfil__form input[type="date"],
+    .addProfil__form select{
+      font-size: 1.1em;
+      padding: 14px;
+    }
+  }
+  
