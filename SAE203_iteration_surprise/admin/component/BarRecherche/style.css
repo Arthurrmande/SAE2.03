@@ -1,80 +1,80 @@
 /* Titre */
 .changeMisenavant__title {
-    font-size: 1.3em;
-    font-weight: bold;
-    margin-bottom: 15px;
-    color: #5400fc;
+  font-size: 1.3em;
+  font-weight: bold;
+  margin-bottom: 0.9rem;
+  color: var(--color-yellow);
+  font-family: var(--ff-sans);
+}
+
+/* Barre de recherche */
+.BarRecherche_form {
+  width: 100%;
+  padding: 0.8rem;
+  margin: 0.4rem 0;
+  border: 1px solid var(--color-fg);
+  border-radius: 0.3rem;
+  font-size: 0.9em;
+  background: var(--color-black);
+  color: var(--color-fg);
+  font-family: var(--ff-sans);
+  transition: all 0.3s ease;
+}
+
+.BarRecherche_form::placeholder {
+  color: #aaa;
+}
+
+.BarRecherche_form:focus {
+  border-color: var(--color-yellow);
+  outline: none;
+}
+
+/* Résultats */
+.BarRecherche__res {
+  margin-top: 0.6rem;
+  background: #1a1a1a;
+  border-radius: 0.3rem;
+  padding: 0.6rem;
+  max-height: 18.8rem;
+  overflow-y: auto;
+  box-shadow: 0 0 0.6rem rgba(0, 0, 0, 0.4);
+}
+
+.BarRecherche__res__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.BarRecherche__res__list li {
+  padding: 0.6rem;
+  border-bottom: 1px solid var(--color-fg);
+  color: var(--color-fg);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.BarRecherche__res__list li:hover {
+  background: #2a2a2a;
+}
+
+/* Responsive */
+@media (min-width: 48rem) {
+  .changeMisenavant {
+    padding: 1.6rem;
   }
-  
-  /* Barre de recherche */
+
+  .changeMisenavant__title {
+    font-size: 1.5em;
+  }
+
   .BarRecherche_form {
-    width: 100%;
-    padding: 12px;
-    margin: 6px 0;
-    border: 1px solid #333;
-    border-radius: 5px;
-    font-size: 0.9em;
-    background: #222;
-    color: #fff;
-    transition: all 0.3s ease;
+    font-size: 1em;
+    padding: 0.9rem;
   }
-  
-  .BarRecherche_form::placeholder {
-    color: #aaa;
-  }
-  
-  .BarRecherche_form:focus {
-    border-color: #5400fc;
-    outline: none;
-  }
-  
-  /* Résultats */
-  .BarRecherche__res {
-    margin-top: 10px;
-    background: #1a1a1a;
-    border-radius: 5px;
-    padding: 10px;
-    max-height: 300px;
-    overflow-y: auto;
-    box-shadow: 0 0 10px rgba(0,0,0,0.4);
-  }
-  
-  .BarRecherche__res__list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
+
   .BarRecherche__res__list li {
-    padding: 10px;
-    border-bottom: 1px solid #333;
-    color: #fff;
-    cursor: pointer;
-    transition: background 0.3s ease;
+    font-size: 1em;
   }
-  
-  .BarRecherche__res__list li:hover {
-    background: #2a2a2a;
-  }
-  
-  /* Responsive */
-  @media (min-width: 768px) {
-    .changeMisenavant {
-      max-width: 500px;
-      padding: 25px;
-    }
-  
-    .changeMisenavant__title {
-      font-size: 1.5em;
-    }
-  
-    .BarRecherche_form {
-      font-size: 1em;
-      padding: 14px;
-    }
-  
-    .BarRecherche__res__list li {
-      font-size: 1em;
-    }
-  }
-  
+}

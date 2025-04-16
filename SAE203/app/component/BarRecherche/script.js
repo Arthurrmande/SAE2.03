@@ -7,6 +7,7 @@ BarRecherche.format = function () {
   return `
     <input 
       type="text" 
+      class="BarRecherche_form"
       placeholder="Rechercher un film..." 
       oninput="C.handlerBardeRecherche(this.value)"
     />
