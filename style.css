@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+:root {
+    /* Primitive Tokens */
+    --color-black: hsl(240, 7%, 3%);
+    
+    --color-white: hsl(0, 0%, 95%);
+    
+    --color-yellow: hsl(47, 100%, 50%);
+    --color-yellow-ligth: hsl(47, 98%, 68%);
+  
+    --ff-sans: 'Montserrat', sans-serif;
+  
+    /* Sementic Tokens */
+    --color-fg: var(--color-white);
+    --color-bg: var(--color-black);
+    --color-accent: var(--color-yellow);
+  }
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body{
+background-color: var(--color-bg);
+}
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  /* âž© Supprime les marges externes */
+  margin: 0;
+}
+
+/* Reset liste */
+ul,
+ol {
+  /* âž© Supprime le padding */
+  padding: 0;
+
+  /* âž© Supprime les puces des Ã©lÃ©ments de liste */
+  list-style: none;
+}
+
+/* link */
+a,
+a:active,
+a:visited {
+  /* âž© Supprime le soulignement des liens */
+  text-decoration: none;
+}
+
+/* Make images easier to work with */
+img,
+picture,
+svg {
+  /* âž© l'image responsive : occupe 100% max de la taille du parent  */
+  max-width: 100%;
+} 
+
+.Menu{
+    margin: auto;
+    padding: 10rem 0;
+    font-family: var(--ff-sans);
+    color: var(--color-white);
+    text-align: center;
+    background-color: var(--color-bg);
+}
+
+.Menu__title{
+  font-family: var(--ff-sans);
+  max-width: 12ch;
+  margin: 0 auto;
+  font-size: 4.5rem;
+  font-weight: 700;
+  letter-spacing: 2.6px;
+  margin-bottom: 3rem;
+}
+
+.Menu__name{
+    max-width: 35ch;
+    margin: 2rem auto;
+    font-size: 1.375rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.Menu__btn{
+    margin-top: 5rem;
+}
+
+.Menu__desc {
+  color: var(--color-black);
+  padding: 0.75rem 1.5rem;
+  border-radius: 6.25rem;
+  background: var(--color-yellow);
+  width: 10rem;
+  margin: 1rem;
+  
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+  
+.Menu__desc:hover {
+  background-color: var(--color-yellow-ligth);
+  color: var(--color-black);
+}
+
+@media (max-width: 48rem) {
+    .Menu__btn{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 3rem;
+    }
+
+    .Menu__desc {
+        font-size: 0.825rem;
+      }
+}
