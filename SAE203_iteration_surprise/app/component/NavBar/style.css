@@ -3,15 +3,15 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 1rem;
+  padding-left: 1rem;
   background-color: var(--color-bg);
   color: var(--color-fg);
   gap: 0.5rem;
 }
 
 .navbar__logo {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 2rem;
+  height: 2rem;
 }
 
 .navbar__list {
@@ -28,6 +28,7 @@
   padding-top: 0.1rem;
   border-radius: 0.4rem;
   transition: background-color 0.3s;
+  align-content: center;
 }
 
 .navbar__item:hover {
@@ -56,6 +57,7 @@
   height: 2rem;
   border-radius: 50%;
   object-fit: cover;
+  margin-top: 0.3rem;
 }
 
 .navbar__select {
@@ -68,18 +70,20 @@
 
 @media (min-width: 48rem) {
   .navbar {
-    padding: 1rem 1.5rem;
+    padding-left: 4rem;
     gap: 1rem;
   }
 
   .navbar__logo {
-    width: 2rem;
-    height: 2rem;
+    width: 3rem;
+    height: 3rem;
+    margin-right: 1rem;
   }
 
   .navbar__item {
-    font-size: 1rem;
-    padding: 0.3rem 0rem;
+    font-size: 1.2rem;
+    padding: 0rem 2rem 0rem 0rem;
+    align-content: center;
   }
 
   .BardeRecherche {
