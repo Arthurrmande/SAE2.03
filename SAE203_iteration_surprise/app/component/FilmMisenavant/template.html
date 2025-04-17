@@ -1,4 +1,10 @@
 <section class="mea">
-    <h2 class="mea__titre">Mis en avant :</h2>
-    <div class="mea__card">{{card}}</div>
-</section>
+    <div class="mea__carousel">
+      <div class="mea__track" id="mea-carousel-track">
+        {{card}}
+      </div>
+      <button class="mea__btn mea__btn--left" onclick="C.carouselPrev()">&#10094;</button>
+      <button class="mea__btn mea__btn--right" onclick="C.carouselNext()">&#10095;</button>
+    </div>
+  </section>
+  

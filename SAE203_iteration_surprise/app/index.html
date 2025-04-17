@@ -31,6 +31,9 @@
 
       import { FilmMisenavant } from "./component/FilmMisenavant/script.js";
       
+      const track = document.getElementById("carousel-track");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
 
       // Controleur
       // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
@@ -54,9 +57,9 @@
         await V.renderNavBar("C.handlerMovies()");
         V.renderMovieCategorie();
         C.getMovie();
-        C.getMise_en_avant();
 
-        // On appelle un premier profile par défaut
+        C.getMise_en_avant();
+        
         C.handlerProfile();
       };
 
@@ -178,6 +181,23 @@
         V.render_mea(html);
       };
 
+      let currentCarouselIndex = 0;
+
+      C.carouselPrev = function () {
+        const track = document.getElementById("mea-carousel-track");
+        if (!track) return;
+        const total = track.children.length;
+        currentCarouselIndex = (currentCarouselIndex - 1 + total) % total;
+        track.style.transform = `translateX(-${currentCarouselIndex * 100}%)`;
+      };
+
+      C.carouselNext = function () {
+        const track = document.getElementById("mea-carousel-track");
+        if (!track) return;
+        const total = track.children.length;
+        currentCarouselIndex = (currentCarouselIndex + 1) % total;
+        track.style.transform = `translateX(-${currentCarouselIndex * 100}%)`;
+      };
 
       C.handlerBardeRecherche = async function (valeur) {
         if (!valeur || valeur.trim().length === 0) {

@@ -1,66 +1,95 @@
-.mea {
-  padding: 1rem 1rem 8rem 1rem;
-}
-
-.mea__card {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); 
-  gap: 1rem;
-}
-
-.mea__card > * {
+.mea__carousel {
   position: relative;
-  cursor: pointer;
   overflow: hidden;
-  border-radius: 1rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  height: 90vh;
+  margin-bottom: 10rem;
 }
 
-.mea__card > *:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0.8rem 1.5rem rgba(0, 0, 0, 0.2);
+.mea__track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+  height: 100%;
 }
 
-.mea__card > *::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0);
-  transition: background 0.3s ease;
-}
-
-.mea__card > *:hover::before {
-  background: rgba(0, 0, 0, 0.7);
+.mea__slide {
+  flex: 0 0 100%;
+  height: 100%;
+  position: relative;
 }
 
 .mea__image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
-  border-radius: 1rem;
 }
 
 .mea__overlay {
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 0;
-  right: 0;
-  color: #fff;
-  font-size: 0.8rem;
-  padding: 0.5rem;
-  text-align: center;
-  opacity: 0;
+  padding: 4rem;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  color: var(--color-white);
+  z-index: 2;
+  max-width: 60%;
 }
 
-.mea__card > *:hover .mea__overlay {
-  opacity: 1;
+.mea__category {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.8;
 }
 
-/* Desktop : à partir de 48rem (768px) */
-@media (min-width: 48rem) {
-  .mea__card {
-    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); /* plus grand format */
-  }
+.mea__name {
+  font-size: 2.8rem;
+  font-weight: bold;
+  margin: 0 0 1rem;
 }
 
+.mea__desc {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.mea__cta {
+  background: #FFD600;
+  color: black;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 2rem;
+  cursor: pointer;
+}
+
+.mea__btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 3rem;
+  color: var(--color-white);
+  font-size: 2rem;
+  padding: 0.5rem 1rem; 
+  cursor: pointer;
+  z-index: 3;
+}
+
+.mea__btn--left {
+  left: 1rem;
+}
+
+.mea__btn--right {
+  right: 1rem;
+}
+
+@media (max-width: 768px){
+
+};
