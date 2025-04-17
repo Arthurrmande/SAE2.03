@@ -94,10 +94,11 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, var(--color-bg), transparent 90%);
+  background: linear-gradient(to bottom,var(--color-bg) 0%,transparent 15%,transparent 40%,var(--color-bg) 100%);
   z-index: 1;
   pointer-events: none;
 }
+
 
 @media (min-width: 48rem) {
   .mea__carousel {

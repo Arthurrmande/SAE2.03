@@ -177,7 +177,7 @@
 
       C.getMise_en_avant = async function () {
         const data = await DataMovie.requestMovies_mea();
-        const html = await FilmMisenavant.format(data); // ← on attend la promesse
+        const html = await FilmMisenavant.format(data);
         V.render_mea(html);
       };
 
