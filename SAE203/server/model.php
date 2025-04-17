@@ -87,7 +87,6 @@ function addMovie($name, $director, $year, $length, $description, $id_category, 
 function getMovieDetail($id){
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
 
-    // On récupère les infos du film (sans la moyenne)
     $sql = "SELECT Movie.id, Movie.name, image, description, director, year, length, Category.name AS category_name, min_age, trailer 
             FROM Movie 
             INNER JOIN Category ON Movie.id_category = Category.id 
@@ -98,7 +97,6 @@ function getMovieDetail($id){
     $stmt->execute();
     $res = $stmt->fetch(PDO::FETCH_OBJ);
 
-    // On récupère la note moyenne via la fonction
     $res->note = getMovieNote($id);
 
     return $res;
@@ -244,22 +242,18 @@ function changeMise_en_avant($id, $mise_en_avant){
 
 
 function addMovieNote($id_movie, $id_profil, $note) {
-    // Connexion à la base de données
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
 
-    // Vérifier si l'utilisateur a déjà noté ce film
     $sql_check = "SELECT * FROM Note WHERE id_movie = :id_movie AND id_profil = :id_profil";
     $stmt_check = $cnx->prepare($sql_check);
     $stmt_check->bindParam(':id_movie', $id_movie);
     $stmt_check->bindParam(':id_profil', $id_profil);
     $stmt_check->execute();
 
-    // Si l'utilisateur a déjà noté, on ne permet pas de noter à nouveau
     if ($stmt_check->rowCount() > 0) {
         return false;
     }
 
-    // Insérer la nouvelle note dans la base de données
     $sql = "INSERT INTO Note (id_movie, id_profil, note) VALUES (:id_movie, :id_profil, :note)";
     $stmt = $cnx->prepare($sql);
     $stmt->bindParam(':id_movie', $id_movie);
@@ -273,7 +267,6 @@ function addMovieNote($id_movie, $id_profil, $note) {
 function getMovieNote($id_movie) {
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
     
-    // Récupérer la note moyenne pour le film
     $sql = "SELECT AVG(note) as moyenne_note FROM Note WHERE id_movie = :id_movie";
     $stmt = $cnx->prepare($sql);
     $stmt->bindParam(':id_movie', $id_movie);
@@ -281,6 +274,5 @@ function getMovieNote($id_movie) {
     
     $res = $stmt->fetch(PDO::FETCH_OBJ);
     
-    // Arrondir à 1 chiffre après la virgule 
     return $res->moyenne_note !== null ? round($res->moyenne_note, 1) : null;
 }

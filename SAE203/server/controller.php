@@ -238,19 +238,15 @@ function addControllerMovieNote() {
   $note = $_REQUEST['note'] ?? null;
   $movie = $_REQUEST['movie'] ?? null;
 
-  // Vérifier si les paramètres sont valides
   if (!$id_movie || !$id_profil || !$note || !is_numeric($note) || $note < 1 || $note > 5) {
       return "Erreur : paramètres invalides.";
   }
 
-  // Appeler la fonction pour ajouter la note
   $ok = addMovieNote($id_movie, $id_profil, $note);
 
   if (!$ok) {
       return "Erreur : vous avez déjà noté ce film.";
   }
-
-  // Retourner un message de succès
   return "Merci d'avoir noté le film $movie ";
 }
 
@@ -262,7 +258,6 @@ function readControllerMovieNote() {
       return "Erreur : film manquant.";
   }
 
-  // Appeler la fonction pour obtenir la note moyenne
   $moyenne_note = getMovieNote($id_movie);
 
   if ($moyenne_note === null) {

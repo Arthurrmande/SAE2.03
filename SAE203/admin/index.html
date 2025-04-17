@@ -49,21 +49,18 @@
         V.renderLog(res);
       }
 
-      // Fonction pour charger les profils
       C.loadProfiles = async function() {
         const profiles = await DataProfile.getProfil(); // Récupérer les profils depuis le backend (vous devez définir cette fonction dans DataProfile)
 
-        // Sélectionner le `<select>` et vider son contenu
         const select = document.querySelector("#profile-select");
         select.innerHTML = ''; // Vider le contenu existant
 
-        // Remplir le select avec les options de profils
         profiles.forEach(profile => {
           let option = document.createElement("option");
-          option.value = profile.name;  // Nom du profil
-          option.setAttribute("data-age", profile.age);  // Date de naissance
-          option.setAttribute("data-img", profile.image);  // Avatar de l'image
-          option.innerText = profile.name;  // Texte visible dans l'option
+          option.value = profile.name;  
+          option.setAttribute("data-age", profile.age);  
+          option.setAttribute("data-img", profile.image);  
+          option.innerText = profile.name;  
           select.appendChild(option);
         });
       };
@@ -77,16 +74,14 @@
         const profileName = selectedOption.value;
         const age = selectedOption.getAttribute("data-age");
         const imageFilename = selectedOption.getAttribute("data-img");
-        const profileId = selectedOption.getAttribute("data-id"); // Récupère l'ID du profil sélectionné
-
-        // Mettre à jour l'image du profil
+        const profileId = selectedOption.getAttribute("data-id"); 
         const picture = document.querySelector("#profile-image");
         picture.src = `../server/images/${imageFilename}`;
 
-        // Remplir les autres champs du formulaire
+       
         document.querySelector("#profile-name").value = profileName;
         document.querySelector("#profile-age").value = age;
-        document.querySelector("#profile-id").value = profileId; // Mettez l'ID dans le champ caché
+        document.querySelector("#profile-id").value = profileId; 
 
       };
 
