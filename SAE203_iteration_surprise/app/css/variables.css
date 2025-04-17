@@ -8,6 +8,8 @@
   
   --color-yellow: hsl(47, 100%, 50%);
   --color-yellow-ligth: hsl(47, 98%, 68%);
+  --color-grey: hsl(0, 0%, 80%);
+  --color-grey-dark: hsl(0, 0%, 20%);
 
   --ff-sans: 'Montserrat', sans-serif;
 

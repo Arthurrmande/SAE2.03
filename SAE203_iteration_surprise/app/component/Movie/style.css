@@ -70,7 +70,8 @@
   }
   .card__film {
     border-radius: 8px;
-    height: 18rem;
+    height: 22rem;
+    width: 15rem;
     display: flex;
     align-items: center;
     justify-content: center;

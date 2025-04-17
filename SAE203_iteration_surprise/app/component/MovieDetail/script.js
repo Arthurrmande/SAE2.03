@@ -18,6 +18,9 @@ MovieDetail.format = function (movie) {
   detail = detail.replace("{{categorie}}", movie.category_name);
   detail = detail.replace("{{age}}", movie.min_age);
   detail = detail.replace("{{note}}", movie.note);
+
+  detail = detail.replace("{{handlerfavori}}", `event.stopPropagation(); C.handlerfavori(${movie.id})`);
+  detail = detail.replace("{{handlerdelfav}}", `event.stopPropagation(); C.handlerdelfav(${movie.id})`);
   console.log(movie.note);
 
   return detail;

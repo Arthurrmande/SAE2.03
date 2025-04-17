@@ -8,20 +8,25 @@
 
     <div class="details__infos">
       <h2 class="details__title">{{titre}}</h2>
-      <p class="details__desc">Synopsis : {{desc}}</p>
+      <p class="details__desc">{{desc}}</p>
       <div class="details__info">
-        <p class="details__realisateur">Réalisateur : {{realisateur}}</p>
-        <p class="details__annee">Année : {{annee}}</p>
-        <p class="details__duree">Durée : {{duree}} minutes</p>
-        <p class="details__categorie">Catégorie : {{categorie}}</p>
-        <p class="details__age">Âge conseillé : {{age}} ans</p>
+        <p class="details__categorie">{{categorie}} .</p>
+        <p class="details__duree">{{duree}} minutes .</p>
+        <p class="details__age">{{age}} .</p>
+        <p class="details__annee">{{annee}} .</p>
+        <p class="details__realisateur">{{realisateur}} .</p>
         <p class="details__note">Note : {{note}}/5</p>
       </div>
       <div class="note-section">
-        <label for="note">Noter ce film :</label>
-        <input type="number" min="0" max="5" placeholder="Note sur 5" class="Note_form" />
-        <button onclick="C.Noter(event)">Noter</button>
+        <label class="note" for="note">Noter ce film :</label>
+        <input type="number" min="0" max="5" placeholder="Note sur 5" class="note_form" />
+        <button class="note_btn" onclick="C.Noter(event)">Noter</button>
+      </div>
+      <div class="details__btn">
+        <button class="details__fav" onclick="{{handlerfavori}}"> <svg class="coeur" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31 26" height="100%" width="100%"><path d="m16.23 25.76 4.22-3.18 5.93-5.1c2.1-2.03 3.4-3.66 3.9-4.87.5-1.18.73-2.4.7-3.67-.03-1.27-.3-2.48-.8-3.64A8.91 8.91 0 0 0 28 2.28c-.94-.86-2-1.48-3.2-1.86-1.2-.38-2.4-.5-3.65-.4-1.24.12-2.4.5-3.5 1.15-.22.2-.36.42-.42.7s-.02.57.12.83c.15.27.36.46.63.56a1.06 1.06 0 0 0 .82 0c.8-.48 1.66-.78 2.57-.88a6.36 6.36 0 0 1 2.7.26 6.56 6.56 0 0 1 2.38 1.35 6.5 6.5 0 0 1 1.62 2.23c.38.86.58 1.76.6 2.7.01.93-.18 1.84-.55 2.7-.5 1.22-2.2 3.1-5.14 5.65-2.22 1.97-4.7 3.96-7.47 6l-7.47-5.96c-2.93-2.6-4.64-4.48-5.14-5.68-.4-1.04-.54-2.1-.4-3.2a6.81 6.81 0 0 1 1.13-3.02 6.4 6.4 0 0 1 2.39-2.14 6.435 6.435 0 0 1 6.16.11 6.46 6.46 0 0 1 2.33 2.2 1.43 1.43 0 0 0 .43.52c.2.14.4.2.63.2a1.26 1.26 0 0 0 .65-.19 1.09 1.09 0 0 0 .46-.49c.1-.2.14-.43.12-.67a1.33 1.33 0 0 0-.25-.63 8.944 8.944 0 0 0-3.2-3.15A9.11 9.11 0 0 0 9.19 0C7.66-.03 6.2.3 4.86 1.02c-1.36.7-2.46 1.7-3.3 3C.7 5.26.22 6.64.06 8.13-.1 9.67.1 11.17.7 12.6c.72 1.7 3 4.2 6.86 7.47 2.18 1.86 4.58 3.74 7.2 5.65a1.19 1.19 0 0 0 .74.26 1.28 1.28 0 0 0 .72-.23z"></path></svg> Ajouter à mes favoris</button>
+        <button class="details__fav" onclick="{{handlerdelfav}}">✖ Retirer de mes favoris</button>
       </div>
     </div>
   </div>
 </div>
+
