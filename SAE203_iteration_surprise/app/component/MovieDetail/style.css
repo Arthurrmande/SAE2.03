@@ -1,57 +1,168 @@
 .details {
-    background-color: var(--color-bg);
-    color: var(--color-white);
-    padding: 1rem;
-    border-radius: 1rem;
-    max-width: 100%;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-  }
-  
-  
-  .details__trailer {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    border: none;
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
-  }
-  
-  
-  .details__bottom {
-    display: flex;
-    gap: 1rem;
-  }
-  
-  
-  .details__image {
-    object-fit: cover;
-    border-radius: 0.5rem;
-    width: 120px;
-    height: fit-content;
-  }
-  
-  
-  .details__infos {
-    display: flex;
-    flex-direction: column;
+  background-color: var(--color-bg);
+  color: var(--color-white);
+  padding: 1rem;
+  border-radius: 1rem;
+  max-width: 100%;
+  box-shadow: 0 0 1.3rem rgba(0, 0, 0, 0.5);
+  margin-bottom: 5rem;
+}
+
+.details__trailer {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: none;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.details__bottom {
+  display: flex;
+  gap: 1rem;
+}
+
+.details__image {
+  object-fit: cover;
+  border-radius: 0.5rem;
+  width: 7.5rem;
+  height: auto;
+}
+
+.details__infos {
+  display: flex;
+  flex-direction: column;
+}
+
+.details__info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.details__title {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.details__desc {
+  font-size: 0.8rem;
+  color: var(--color-white);
+  font-weight: bold;
+}
+
+.details__realisateur,
+.details__annee,
+.details__duree,
+.details__categorie,
+.details__age,
+.details__note {
+  display: contents;
+  font-size: 0.5rem;
+  color: var(--color-grey);
+}
+
+.note-section {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.note {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.6rem;
+  color: var(--color-grey);
+}
+
+.note_form {
+  font-size: 0.7rem;
+  color: var(--color-white);
+  background-color: var(--color-grey-dark);
+  border-radius: 1rem;
+  width: 6rem;
+  padding: 0.2rem 0.5rem;
+  border: none;
+}
+
+.note_btn {
+  background-color: var(--color-yellow);
+  color: var(--color-black);
+  border: none;
+  border-radius: 2rem;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+
+.note_btn:hover {
+  background-color: var(--color-yellow-ligth);
+}
+
+.details__btn {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.coeur {
+  width: 1rem;
+  height: 1rem;
+}
+
+.details__fav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--color-yellow);
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  width: max-content;
+}
+
+.details__fav:hover {
+  background-color: var(--color-yellow-ligth);
+}
+
+@media (min-width: 48rem) {
+  .details {
+    padding: 2rem;
+    max-width: 62.5rem;
+    margin: 2rem auto;
   }
 
-  .details__info{
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  .details__bottom {
+    flex-direction: row;
+    gap: 2rem;
   }
-  
-  .details__title {
+
+  .details__image {
+    width: 12.7rem;
+    height: auto;
+  }
+
+  .details__infos {
+    flex: 1;
+  }
+
+  .details__info {
+    gap: 1rem;
     font-size: 1rem;
-    font-weight: bold;
-    margin: 0;
+    margin-top: 1rem;
   }
-  
+
+  .details__title {
+    font-size: 2.5rem;
+  }
+
   .details__desc {
-    font-size: 0.8rem;
+    font-size: 1rem;
     color: var(--color-white);
-    font-weight: bold;
+    margin: 0.5rem 0;
   }
 
   .details__realisateur,
@@ -60,144 +171,29 @@
   .details__categorie,
   .details__age,
   .details__note {
-    display: contents;
-    font-size: 0.5rem;
+    font-size: 1rem;
     color: var(--color-grey);
   }
 
   .note-section {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
+    margin-top: 1.5rem;
   }
 
-  .note{
-    display: flex;
-    align-items: center;
+  .note {
     gap: 0.5rem;
-    font-size: 0.6rem;
-    color: var(--color-grey);
+    font-size: 1rem;
   }
 
   .note_form {
-    font-size: 0.7rem;
-    color: var(--color-white);
-    background-color: var(--color-grey-dark);
+    font-size: 1rem;
     border-radius: 1rem;
-    width: 6rem;
+    width: 8rem;
     padding: 0.2rem 0.5rem;
-    border: none;
   }
 
   .note_btn {
-    background-color: var(--color-yellow);
-    color: var(--color-black);
-    border: none;
     border-radius: 2rem;
     padding: 0.2rem 0.5rem;
-    font-size: 0.7rem;
-    cursor: pointer;
+    font-size: 1rem;
   }
-
-  .note_btn:hover {
-    background-color: var(--color-yellow-ligth);
-  }
-
-  .details__btn{
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-
-  .coeur{
-    width: 1rem;
-    height: 1rem;
-  }
-
-  .details__fav{
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-
-    background-color: var(--color-yellow);
-    border: none;
-    border-radius: 1rem;
-    cursor: pointer;
-    width: max-content;
-  }
-
-  .details__fav:hover{
-    background-color: var(--color-yellow-ligth);
-  }
-
-  @media (min-width: 768px) {
-    .details {
-      padding: 2rem;
-      max-width: 1000px;
-      margin: 2rem auto;
-    }
-  
-    .details__bottom {
-      flex-direction: row;
-      gap: 2rem;
-    }
-  
-    .details__image {
-      width: 203px;
-      height: auto;
-    }
-  
-    .details__infos {
-      flex: 1;
-    }
-    .details__info {
-      gap: 1rem;
-      font-size: 1rem;
-      margin-top: 1rem;
-    }
-
-    .details__title {
-      font-size: 2.5rem;
-    }
-
-    .details__desc {
-      font-size: 1rem;
-      color: var(--color-white);
-      margin: 0.5rem 0;
-    }
-
-    .details__realisateur,
-    .details__annee,
-    .details__duree,
-    .details__categorie,
-    .details__age,
-    .details__note {
-      font-size: 1rem;
-      color: var(--color-grey);
-    }
-
-    .note-section {
-      margin-top: 1.5rem;
-    }
-
-    .note{
-      gap: 0.5rem;
-      font-size: 1rem;
-    }
-  
-    .note_form {
-      font-size: 1rem;
-      border-radius: 1rem;
-      width: 8rem;
-      padding: 0.2rem 0.5rem;
-    }
-  
-    .note_btn {
-      border-radius: 2rem;
-      padding: 0.2rem 0.5rem;
-      font-size: 1rem;
-    }
-  }
-  
+}
