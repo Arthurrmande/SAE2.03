@@ -45,3 +45,28 @@ id : Une clé unique en mode auto-incrément de type INT.
 id_profil : de type INT pour stocker l'id du profil qui a noter le film.
 id_movie : de type INT pour stocker l'id du film noter.
 note : de type INT pour stocker la note donne par un profil.
+
+
+Cardinalitées : 
+
+Profil : 
+Un profil peut regardé 0 ou plusieurs films et un films peut etre regarder 0 fois ou plusieurs fois par un profil .
+Donc 0,n et n,0
+
+Un profil peut ajouté 0 ou plusieurs films en favoris et il peut y avoir 0 ou plusieurs profils qui ajoute des favoris.
+Donc 0,n et n,0
+
+Un profil peut noté 0 ou plusieurs films et il peut y avoir 0 ou plusieurs profils qui notent un film .
+Donc 0,n et n,0
+
+Favoris : 
+Un film peut etre ajouté 0 fois ou plusieurs fois en favorie et il peut y avoir 0 ou plusieurs films dans les favories .
+Donc 0,n et n,0
+
+Note : 
+Un film peut etre noté 0 fois ou plusieurs fois et il peut y avoir 0 ou plusieurs films notés .
+Donc 0,n et n,0
+
+Category : 
+Un film a au moins une categorie mais un categorie peut avoir 0 ou plusieurs films . 
+Donc 1,1 et 0,n
